@@ -4,207 +4,114 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>RiskLens Platform</title>
-
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
-
-body{
-margin:0;
-font-family:Arial;
-background:#0b1020;
-color:white;
-}
-
-.header{
-background:#111633;
-padding:15px;
-font-size:22px;
-font-weight:bold;
-}
-
-.container{
-padding:20px;
-}
-
-.card{
-background:#151a3a;
-padding:20px;
-margin-bottom:15px;
-border-radius:10px;
-}
-
-.value{
-font-size:26px;
-margin-top:8px;
-}
-
+body{margin:0;font-family:Arial;background:#0b1020;color:white;}
+.header{background:#111633;padding:15px;font-size:22px;font-weight:bold;}
+.container{padding:20px;}
+.card{background:#151a3a;padding:20px;margin-bottom:15px;border-radius:10px;}
+.value{font-size:26px;margin-top:8px;}
 .green{color:#00ff88;}
 .red{color:#ff4d4d;}
 .yellow{color:#ffd166;}
-
-button{
-background:#00ff88;
-border:none;
-padding:12px;
-border-radius:6px;
-font-weight:bold;
-margin-top:10px;
-cursor:pointer;
-}
-
-input{
-width:100%;
-padding:12px;
-margin-top:10px;
-border-radius:6px;
-border:none;
-}
-
-#login{
-max-width:400px;
-margin:100px auto;
-background:#151a3a;
-padding:20px;
-border-radius:10px;
-}
-
-#dashboard{
-display:none;
-}
-
+button{background:#00ff88;border:none;padding:12px;border-radius:6px;font-weight:bold;margin-top:10px;cursor:pointer;}
+input{width:100%;padding:12px;margin-top:10px;border-radius:6px;border:none;}
+#login{max-width:420px;margin:90px auto;background:#151a3a;padding:22px;border-radius:10px;}
+#dashboard{display:none;}
+.small{opacity:.7;font-size:13px;margin-top:10px;}
 </style>
-
 </head>
 
 <body>
 
 <div id="login">
+  <h2>RiskLens Secure Access</h2>
+  <div class="small">Demo credentials: <b>admin</b> / <b>risklens</b></div>
 
-<h2>RiskLens Secure Access</h2>
+  <input id="user" placeholder="Username" autocapitalize="none" autocomplete="username">
+  <input id="pass" type="password" placeholder="Password" autocomplete="current-password">
 
-<input id="user" placeholder="Username">
-<input id="pass" type="password" placeholder="Password">
-
-<button onclick="login()">Login</button>
-
-<p id="error" style="color:red;"></p>
-
+  <button onclick="login()">Login</button>
+  <p id="error" style="color:#ff4d4d;"></p>
 </div>
 
 <div id="dashboard">
+  <div class="header">RiskLens Intelligence Platform — Investor Demo</div>
 
-<div class="header">
-RiskLens Intelligence Platform
-</div>
+  <div class="container">
 
-<div class="container">
+    <div class="card">
+      System Status
+      <div class="value green">LIVE</div>
+    </div>
 
-<div class="card">
-System Status
-<div class="value green">LIVE</div>
-</div>
+    <div class="card">
+      Risk Index
+      <div class="value yellow" id="risk">42</div>
+    </div>
 
-<div class="card">
-Risk Index
-<div class="value yellow" id="risk">42</div>
-</div>
+    <div class="card">
+      Threat Level
+      <div class="value red" id="threat">LOW</div>
+      <button onclick="simulate()">Run Simulation</button>
+    </div>
 
-<div class="card">
-Threat Level
-<div class="value red" id="threat">LOW</div>
-<button onclick="simulate()">Run Simulation</button>
-</div>
+    <div class="card">
+      Risk Trend
+      <canvas id="chart"></canvas>
+    </div>
 
-<div class="card">
-Risk Trend
-<canvas id="chart"></canvas>
-</div>
-
-</div>
-
+  </div>
 </div>
 
 <script>
-
 function login(){
+  const u=document.getElementById("user").value.trim();
+  const p=document.getElementById("pass").value;
 
-let u=document.getElementById("user").value;
-let p=document.getElementById("pass").value;
-
-if(u==="admin" && p==="risklens"){
-
-document.getElementById("login").style.display="none";
-document.getElementById("dashboard").style.display="block";
-
-initChart();
-
-}
-else{
-
-document.getElementById("error").innerHTML="Access denied";
-
-}
-
+  if(u==="admin" && p==="risklens"){
+    document.getElementById("login").style.display="none";
+    document.getElementById("dashboard").style.display="block";
+    initChart();
+  } else {
+    document.getElementById("error").innerText="Access denied";
+  }
 }
 
 let chart;
 let data=[12,19,30,25,42];
 
 function initChart(){
-
-chart=new Chart(
-document.getElementById('chart'),
-{
-type:'line',
-
-data:{
-labels:["T1","T2","T3","T4","Now"],
-datasets:[{
-label:"Risk Index",
-data:data,
-borderColor:"#00ff88",
-tension:0.4
-}]
-},
-
-options:{
-plugins:{legend:{labels:{color:"white"}}},
-scales:{
-x:{ticks:{color:"white"}},
-y:{ticks:{color:"white"}}
-}
-}
-
-}
-);
-
+  chart=new Chart(document.getElementById('chart'),{
+    type:'line',
+    data:{
+      labels:["T1","T2","T3","T4","Now"],
+      datasets:[{label:"Risk Index",data:data,borderColor:"#00ff88",tension:0.4}]
+    },
+    options:{
+      plugins:{legend:{labels:{color:"white"}}},
+      scales:{x:{ticks:{color:"white"}},y:{ticks:{color:"white"}}}
+    }
+  });
 }
 
 function simulate(){
+  const risk=Math.floor(Math.random()*100);
+  document.getElementById("risk").innerText=risk;
 
-let risk=Math.floor(Math.random()*100);
+  let threat="LOW";
+  if(risk>70) threat="HIGH";
+  else if(risk>40) threat="MEDIUM";
+  document.getElementById("threat").innerText=threat;
 
-document.getElementById("risk").innerHTML=risk;
+  data.push(risk);
+  if(data.length>8) data.shift();
 
-let threat="LOW";
-
-if(risk>70) threat="HIGH";
-else if(risk>40) threat="MEDIUM";
-
-document.getElementById("threat").innerHTML=threat;
-
-data.push(risk);
-
-if(data.length>8) data.shift();
-
-chart.data.labels.push("Now");
-chart.data.labels.shift();
-
-chart.update();
-
+  chart.data.labels.push("Now");
+  chart.data.labels.shift();
+  chart.update();
 }
-
 </script>
 
 </body>
