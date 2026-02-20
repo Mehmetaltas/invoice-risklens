@@ -3,21 +3,24 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RiskLens Universal Risk Intelligence Engine</title>
+
+<title>RiskLens Intelligence Platform</title>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
 
 body{
 margin:0;
-font-family:Arial,Helvetica,sans-serif;
 background:#0b1020;
 color:white;
+font-family:Arial;
 }
 
 .header{
 background:#111633;
-padding:15px;
-font-size:22px;
+padding:20px;
+font-size:24px;
 font-weight:bold;
 }
 
@@ -28,45 +31,49 @@ padding:20px;
 .card{
 background:#151a3a;
 padding:20px;
-margin-bottom:15px;
-border-radius:8px;
+margin-bottom:20px;
+border-radius:10px;
 }
 
 .value{
 font-size:28px;
-font-weight:bold;
-margin-top:5px;
+margin-top:10px;
 }
 
 .green{color:#00ff88;}
 .red{color:#ff4d4d;}
 .yellow{color:#ffd166;}
 
-.button{
+button{
 background:#00ff88;
-color:black;
-padding:10px;
 border:none;
-border-radius:5px;
-margin-top:10px;
+padding:12px;
+border-radius:6px;
 font-weight:bold;
-cursor:pointer;
+margin-top:10px;
+}
+
+canvas{
+background:#151a3a;
+padding:10px;
+border-radius:10px;
 }
 
 </style>
+
 </head>
 
 <body>
 
 <div class="header">
-RiskLens Universal Risk Intelligence Engine
+RiskLens Intelligence Platform — Investor Demo
 </div>
 
 <div class="container">
 
 <div class="card">
 System Status
-<div class="value green">OPERATIONAL</div>
+<div class="value green">LIVE</div>
 </div>
 
 <div class="card">
@@ -75,23 +82,56 @@ Global Risk Index
 </div>
 
 <div class="card">
-Active Monitoring Nodes
-<div class="value">128</div>
+Threat Level
+<div class="value red" id="threat">LOW</div>
+<button onclick="simulate()">Run Simulation</button>
 </div>
 
 <div class="card">
-Threat Level
-<div class="value red" id="threat">LOW</div>
-<button class="button" onclick="simulate()">Run Simulation</button>
+Risk Trend (Live Simulation)
+<canvas id="chart"></canvas>
 </div>
 
 </div>
 
 <script>
 
+let data=[12,19,30,25,40,42];
+
+let chart=new Chart(
+document.getElementById('chart'),
+{
+type:'line',
+
+data:{
+labels:["T1","T2","T3","T4","T5","Now"],
+datasets:[
+{
+label:"Risk Index",
+data:data,
+borderColor:"#00ff88",
+tension:0.4
+}
+]
+},
+
+options:{
+plugins:{
+legend:{labels:{color:"white"}}
+},
+scales:{
+x:{ticks:{color:"white"}},
+y:{ticks:{color:"white"}}
+}
+}
+
+}
+);
+
 function simulate(){
 
 let risk=Math.floor(Math.random()*100);
+
 document.getElementById("risk").innerHTML=risk;
 
 let threat="LOW";
@@ -100,6 +140,15 @@ if(risk>70) threat="HIGH";
 else if(risk>40) threat="MEDIUM";
 
 document.getElementById("threat").innerHTML=threat;
+
+data.push(risk);
+
+if(data.length>10) data.shift();
+
+chart.data.labels.push("Now");
+chart.data.labels.shift();
+
+chart.update();
 
 }
 
