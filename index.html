@@ -50,6 +50,7 @@ border:none;
 border-radius:5px;
 margin-top:10px;
 font-weight:bold;
+cursor:pointer;
 }
 
 </style>
@@ -94,3 +95,15 @@ let risk=Math.floor(Math.random()*100);
 document.getElementById("risk").innerHTML=risk;
 
 let threat="LOW";
+
+if(risk>70) threat="HIGH";
+else if(risk>40) threat="MEDIUM";
+
+document.getElementById("threat").innerHTML=threat;
+
+}
+
+</script>
+
+</body>
+</html>
