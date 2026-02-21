@@ -1,264 +1,314 @@
 <!doctype html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RiskLens | Global Risk Intelligence Infrastructure</title>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>RiskLens | Global Risk Intelligence Infrastructure</title>
-
-<style>
-
-body{
-background:#0b1220;
-color:#eaf1ff;
-font-family:Arial;
-margin:0;
-padding:20px;
-}
-
-.container{
-max-width:1000px;
-margin:auto;
-}
-
-.card{
-background:#111a2e;
-padding:20px;
-border-radius:12px;
-margin-bottom:20px;
-}
-
-.logo{
-width:80px;
-height:80px;
-}
-
-.badge{
-background:#22c55e;
-padding:8px;
-border-radius:8px;
-display:inline-block;
-margin-top:10px;
-}
-
-iframe{
-width:100%;
-height:700px;
-border:none;
-border-radius:12px;
-margin-top:10px;
-}
-
-.button{
-background:#4c7dff;
-color:white;
-padding:10px;
-text-decoration:none;
-border-radius:8px;
-display:inline-block;
-margin-top:10px;
-}
-
-.lang{
-float:right;
-cursor:pointer;
-color:#4c7dff;
-font-weight:bold;
-}
-
-</style>
-
+  <style>
+    :root{
+      --bg:#0b1220;
+      --card:#111a2e;
+      --text:#eaf1ff;
+      --muted:#a6b3d1;
+      --accent:#4c7dff;
+      --good:#22c55e;
+      --border:rgba(255,255,255,.10);
+      --radius:14px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;padding:20px;background:var(--bg);color:var(--text);font-family:Arial, sans-serif;}
+    .container{max-width:1050px;margin:0 auto;}
+    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px;margin-bottom:16px;}
+    .top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+    .brand{display:flex;align-items:center;gap:12px;}
+    .logo{width:58px;height:58px}
+    h1{margin:0;font-size:28px}
+    h2{margin:0 0 10px 0;font-size:20px}
+    p{margin:10px 0;color:rgba(234,241,255,.92);line-height:1.5}
+    .muted{color:var(--muted)}
+    .btn{
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.06);
+      color:var(--text);
+      padding:10px 12px;
+      border-radius:12px;
+      cursor:pointer;
+      font-weight:700;
+    }
+    .badge{
+      display:inline-block;
+      margin-top:10px;
+      background:rgba(34,197,94,.18);
+      border:1px solid rgba(34,197,94,.35);
+      padding:8px 10px;
+      border-radius:12px;
+      font-weight:900;
+      color:#d9ffe7;
+    }
+    .pill{
+      display:inline-block;
+      background:rgba(76,125,255,.14);
+      border:1px solid rgba(76,125,255,.28);
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:800;
+      margin-right:8px;
+      margin-top:8px;
+    }
+    iframe{width:100%;height:720px;border:none;border-radius:12px;margin-top:10px;background:#0b1220}
+    ul{margin:8px 0 0 18px;color:rgba(234,241,255,.92)}
+    li{margin:6px 0}
+    .email{display:inline-block;background:#0b1220;border:1px solid var(--border);padding:8px 10px;border-radius:12px;margin-top:6px}
+    a.link{color:#cfe0ff}
+    .version{font-size:12px;color:var(--muted);margin-top:6px}
+    .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+    .hidden{display:none !important;}
+  </style>
 </head>
 
 <body>
-
-<div class="container">
-
-<div class="card">
-
-<span class="lang" onclick="toggleLang()">TR / EN</span>
-
-<svg class="logo" viewBox="0 0 100 100">
-
-<circle cx="50" cy="50" r="40" stroke="#4c7dff" stroke-width="4" fill="none"/>
-
-<circle cx="50" cy="50" r="20" fill="#4c7dff"/>
-
-<line x1="70" y1="70" x2="90" y2="90" stroke="#4c7dff" stroke-width="6"/>
-
-</svg>
-
-<h1 id="title">RiskLens</h1>
-
-<p id="subtitle">
-Global Risk Intelligence Infrastructure
-</p>
-
-<p id="desc">
-
-RiskLens is a global risk intelligence infrastructure company.
-
-RiskLens analyzes invoices, detects fraud, and produces risk scores for financial institutions.
-
-RiskLens does not lend money and does not finance transactions.
-
-RiskLens provides core infrastructure for banks, fintech companies, and financial institutions worldwide.
-
-</p>
-
-<p id="infra">
-
-RiskLens is designed to become core financial infrastructure globally.
-
-</p>
-
-<div class="badge">
-Risk Score Example: 85 / LOW RISK
-</div>
-
-</div>
-
-
-
-<div class="card">
-
-<h2 id="whyTitle">Why RiskLens Exists</h2>
-
-<p id="whyText">
-
-Global financial institutions process trillions of dollars annually.
-
-Fraud and risk uncertainty create billions in losses.
-
-RiskLens solves this by providing risk intelligence infrastructure.
-
-</p>
-
-</div>
-
-
-
-<div class="card">
-
-<h2 id="marketTitle">Market Opportunity</h2>
-
-<p id="marketText">
-
-Global invoice financing exceeds $3 trillion annually.
-
-Risk intelligence infrastructure demand is increasing globally.
-
-</p>
-
-</div>
-
-
-
-<div class="card">
-
-<h2 id="revenueTitle">Revenue Model</h2>
-
-<ul id="revenueList">
-
-<li>Bank licensing</li>
-
-<li>API licensing</li>
-
-<li>Risk intelligence licensing</li>
-
-<li>Fraud detection licensing</li>
-
-</ul>
-
-</div>
-
-
-
-<div class="card">
-
-<h2 id="pdfTitle">Investor Presentation</h2>
-
-<iframe src="https://drive.google.com/file/d/1mbKvLr0G_hglcCIttU68LiJ-sh-Ws4Mz/preview"></iframe>
-
-</div>
-
-
-
-<div class="card">
-
-<h2 id="contactTitle">Contact</h2>
-
-<p>
-42mehmetaltas@gmail.com
-</p>
-
-</div>
-
-
-
-</div>
-
-
+  <div class="container">
+
+    <!-- HEADER -->
+    <div class="card">
+      <div class="top">
+        <div class="brand">
+          <!-- Inline logo (no file upload needed) -->
+          <svg class="logo" viewBox="0 0 100 100" aria-label="RiskLens Logo">
+            <circle cx="50" cy="50" r="38" stroke="#4c7dff" stroke-width="5" fill="none"/>
+            <circle cx="50" cy="50" r="18" fill="#4c7dff"/>
+            <line x1="70" y1="70" x2="92" y2="92" stroke="#4c7dff" stroke-width="7" stroke-linecap="round"/>
+          </svg>
+
+          <div>
+            <h1>RiskLens</h1>
+            <div class="version">Version: RL-TR-EN-v3</div>
+          </div>
+        </div>
+
+        <button class="btn" id="langBtn" onclick="toggleLang()">TR</button>
+      </div>
+
+      <!-- EN HEADER TEXT -->
+      <div id="enBlock">
+        <p class="muted"><b>Global Risk Intelligence Infrastructure</b></p>
+
+        <p>
+          RiskLens is a global risk intelligence infrastructure company.
+          RiskLens analyzes invoices, detects fraud signals, and produces risk scores for financial institutions.
+          RiskLens does <b>not</b> lend money and does <b>not</b> finance transactions. It provides decision-support infrastructure.
+        </p>
+
+        <p>
+          RiskLens is designed to become core infrastructure used by banks, financial institutions, and global fintech platforms worldwide.
+        </p>
+
+        <div class="badge">Risk Score Example: 85 / LOW RISK</div>
+
+        <div class="row">
+          <span class="pill">Enterprise Licensing</span>
+          <span class="pill">API Licensing</span>
+          <span class="pill">Fraud & Compliance</span>
+          <span class="pill">Islamic Finance Ready</span>
+        </div>
+      </div>
+
+      <!-- TR HEADER TEXT -->
+      <div id="trBlock" class="hidden">
+        <p class="muted"><b>Küresel Risk Zekâsı Altyapısı</b></p>
+
+        <p>
+          RiskLens, küresel risk zekâsı altyapısıdır.
+          Faturaları analiz eder, sahtecilik sinyallerini tespit eder ve finans kurumları için risk skoru üretir.
+          RiskLens <b>kredi vermez</b> ve <b>ödeme yapmaz</b>. Sadece karar destek altyapısı sağlar.
+        </p>
+
+        <p>
+          RiskLens; bankalar, finans kurumları ve global fintech platformları için küresel “çekirdek altyapı” olacak şekilde tasarlanmıştır.
+        </p>
+
+        <div class="badge">Risk Skoru Örneği: 85 / DÜŞÜK RİSK</div>
+
+        <div class="row">
+          <span class="pill">Kurumsal Lisans</span>
+          <span class="pill">API Lisansı</span>
+          <span class="pill">Sahtecilik & Uyum</span>
+          <span class="pill">Katılım Bankacılığı Uyumlu</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- WHY -->
+    <div class="card">
+      <div id="enWhy">
+        <h2>Why RiskLens Exists</h2>
+        <p>
+          Financial institutions process massive invoice and transaction volumes. Fraud, fake invoices, and uncertainty create large losses.
+          RiskLens provides real-time risk intelligence infrastructure to make faster, safer, smarter decisions.
+        </p>
+      </div>
+      <div id="trWhy" class="hidden">
+        <h2>RiskLens Neden Var?</h2>
+        <p>
+          Finans kurumları çok büyük fatura ve işlem hacmi yönetir. Sahtecilik, naylon fatura ve belirsizlik ciddi kayıplar doğurur.
+          RiskLens, daha hızlı, daha güvenli ve daha doğru karar için gerçek zamanlı risk zekâsı altyapısı sağlar.
+        </p>
+      </div>
+    </div>
+
+    <!-- MARKET -->
+    <div class="card">
+      <div id="enMarket">
+        <h2>Market Opportunity</h2>
+        <p>
+          Invoice financing is a multi-trillion-dollar market. Risk & fraud intelligence demand grows as regulations tighten globally.
+          RiskLens targets banks, factoring companies, funds, and fintech platforms.
+        </p>
+      </div>
+      <div id="trMarket" class="hidden">
+        <h2>Pazar Fırsatı</h2>
+        <p>
+          Fatura finansmanı trilyon dolarlık bir pazardır. Regülasyonlar ağırlaştıkça risk ve sahtecilik zekâsı altyapısına talep artar.
+          RiskLens; bankalar, faktoring şirketleri, fonlar ve fintech platformlarını hedefler.
+        </p>
+      </div>
+    </div>
+
+    <!-- PLATFORM -->
+    <div class="card">
+      <div id="enPlatform">
+        <h2>Platform Vision (50+ Products Ready)</h2>
+        <p>
+          RiskLens is a modular platform. Investors can back one module or the full platform.
+        </p>
+        <ul>
+          <li>RiskLens Invoice (invoice risk intelligence)</li>
+          <li>RiskLens FraudShield (fraud detection infrastructure)</li>
+          <li>RiskLens Compliance (AML/KYC & suspicious activity signals)</li>
+          <li>RiskLens Cyber (cyber risk monitoring)</li>
+          <li>RiskLens Crypto (crypto transaction risk intelligence)</li>
+        </ul>
+      </div>
+
+      <div id="trPlatform" class="hidden">
+        <h2>Platform Vizyonu (50+ Ürüne Hazır)</h2>
+        <p>
+          RiskLens modüler bir platformdur. Yatırımcı ister tek modüle, ister tüm platforma dahil olabilir.
+        </p>
+        <ul>
+          <li>RiskLens Invoice (fatura risk zekâsı)</li>
+          <li>RiskLens FraudShield (sahtecilik tespit altyapısı)</li>
+          <li>RiskLens Compliance (AML/KYC & şüpheli işlem sinyalleri)</li>
+          <li>RiskLens Cyber (siber risk izleme)</li>
+          <li>RiskLens Crypto (kripto işlem risk zekâsı)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- REVENUE -->
+    <div class="card">
+      <div id="enRevenue">
+        <h2>Revenue Scalability</h2>
+        <ul>
+          <li>Enterprise subscriptions</li>
+          <li>API licensing</li>
+          <li>Infrastructure licensing</li>
+          <li>Per-transaction scoring/report fees</li>
+        </ul>
+        <p class="muted">Once integrated, RiskLens becomes part of core infrastructure (recurring revenue).</p>
+      </div>
+
+      <div id="trRevenue" class="hidden">
+        <h2>Gelir Ölçeklenebilirliği</h2>
+        <ul>
+          <li>Kurumsal abonelik</li>
+          <li>API lisansı</li>
+          <li>Altyapı lisansı</li>
+          <li>İşlem başı skor/rapor ücreti</li>
+        </ul>
+        <p class="muted">Entegre olunca RiskLens çekirdek altyapının parçası olur (tekrarlı gelir).</p>
+      </div>
+    </div>
+
+    <!-- PDF -->
+    <div class="card">
+      <div id="enPdf">
+        <h2>Investor Pitch Deck (Embedded)</h2>
+        <p class="muted">If the PDF doesn’t render, open it directly in a new tab.</p>
+      </div>
+      <div id="trPdf" class="hidden">
+        <h2>Yatırımcı Sunumu (Gömülü)</h2>
+        <p class="muted">PDF görünmezse yeni sekmede direkt açabilirsiniz.</p>
+      </div>
+
+      <iframe
+        src="https://drive.google.com/file/d/1mbKvLr0G_hglcCIttU68LiJ-sh-Ws4Mz/preview"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+
+      <p style="margin-top:10px">
+        <a class="link" target="_blank" rel="noopener"
+           href="https://drive.google.com/file/d/1mbKvLr0G_hglcCIttU68LiJ-sh-Ws4Mz/view">
+          Open PDF in new tab
+        </a>
+      </p>
+    </div>
+
+    <!-- CONTACT -->
+    <div class="card">
+      <div id="enContact">
+        <h2>Contact</h2>
+        <div class="email">42mehmetaltas@gmail.com</div>
+        <p style="margin-top:10px" class="muted">
+          Next step to improve investor trust: domain email (founder@risklens.ai).
+        </p>
+      </div>
+
+      <div id="trContact" class="hidden">
+        <h2>İletişim</h2>
+        <div class="email">42mehmetaltas@gmail.com</div>
+        <p style="margin-top:10px" class="muted">
+          Yatırımcı güveni için bir sonraki adım: domain email (founder@risklens.ai).
+        </p>
+      </div>
+    </div>
+
+  </div>
 
 <script>
+  // Hide/Show language blocks (robust, no partial translations)
+  let current = "en";
 
-let lang="en";
+  const enIds = ["enBlock","enWhy","enMarket","enPlatform","enRevenue","enPdf","enContact"];
+  const trIds = ["trBlock","trWhy","trMarket","trPlatform","trRevenue","trPdf","trContact"];
 
-function toggleLang(){
+  function showLang(lang){
+    const show = (ids) => ids.forEach(id => document.getElementById(id).classList.remove("hidden"));
+    const hide = (ids) => ids.forEach(id => document.getElementById(id).classList.add("hidden"));
 
-if(lang=="en"){
+    if(lang === "tr"){
+      hide(enIds); show(trIds);
+      document.getElementById("langBtn").textContent = "EN";
+      document.documentElement.lang = "tr";
+      current = "tr";
+    } else {
+      hide(trIds); show(enIds);
+      document.getElementById("langBtn").textContent = "TR";
+      document.documentElement.lang = "en";
+      current = "en";
+    }
+  }
 
-document.getElementById("subtitle").innerHTML=
-"Küresel Risk Zekası Altyapısı";
+  function toggleLang(){
+    showLang(current === "en" ? "tr" : "en");
+  }
 
-document.getElementById("desc").innerHTML=
-
-"RiskLens küresel risk zekası altyapısıdır. Faturaları analiz eder, sahteciliği tespit eder ve risk skoru üretir. RiskLens kredi vermez.";
-
-document.getElementById("infra").innerHTML=
-
-"RiskLens bankalar ve finans kurumları için küresel altyapı olarak tasarlanmıştır.";
-
-document.getElementById("whyTitle").innerHTML=
-"RiskLens Neden Var";
-
-document.getElementById("whyText").innerHTML=
-
-"Küresel finans kurumları her yıl trilyonlarca dolar işlem yapmaktadır. Sahtecilik ve risk büyük kayıplara neden olmaktadır.";
-
-document.getElementById("marketTitle").innerHTML=
-"Pazar Fırsatı";
-
-document.getElementById("marketText").innerHTML=
-
-"Küresel fatura finansmanı hacmi 3 trilyon doları aşmaktadır.";
-
-document.getElementById("revenueTitle").innerHTML=
-"Gelir Modeli";
-
-document.getElementById("revenueList").innerHTML=
-
-"<li>Banka lisansları</li><li>API lisansları</li><li>Risk analizi lisansları</li><li>Sahtecilik tespiti lisansları</li>";
-
-document.getElementById("pdfTitle").innerHTML=
-"Yatırımcı Sunumu";
-
-document.getElementById("contactTitle").innerHTML=
-"İletişim";
-
-lang="tr";
-
-}else{
-
-location.reload();
-
-}
-
-}
-
+  // Start in EN
+  showLang("en");
 </script>
-
 
 </body>
 </html>
