@@ -11,7 +11,7 @@
 body{
 background:#0b1220;
 color:#eaf1ff;
-font-family:Arial;
+font-family:Arial, sans-serif;
 margin:0;
 padding:20px;
 }
@@ -28,23 +28,19 @@ border-radius:12px;
 margin-bottom:20px;
 }
 
+.logo{
+width:80px;
+height:80px;
+margin-bottom:10px;
+}
+
 h1,h2{
 margin-top:0;
 }
 
-.button{
-display:inline-block;
-padding:10px;
-background:#4c7dff;
-color:white;
-text-decoration:none;
-border-radius:8px;
-margin-top:10px;
-}
-
 .badge{
 background:#22c55e;
-padding:8px;
+padding:8px 12px;
 border-radius:8px;
 display:inline-block;
 margin-top:10px;
@@ -66,10 +62,21 @@ display:inline-block;
 margin-top:10px;
 }
 
+.button{
+display:inline-block;
+padding:10px 15px;
+background:#4c7dff;
+color:white;
+text-decoration:none;
+border-radius:8px;
+margin-top:10px;
+}
+
 .lang{
 float:right;
 cursor:pointer;
 color:#4c7dff;
+font-weight:bold;
 }
 
 </style>
@@ -84,6 +91,19 @@ color:#4c7dff;
 <div class="card">
 
 <span class="lang" onclick="toggleLang()">TR / EN</span>
+
+
+<!-- LOGO -->
+<svg class="logo" viewBox="0 0 100 100">
+
+<circle cx="50" cy="50" r="40" stroke="#4c7dff" stroke-width="4" fill="none"/>
+
+<circle cx="50" cy="50" r="20" fill="#4c7dff"/>
+
+<line x1="70" y1="70" x2="90" y2="90" stroke="#4c7dff" stroke-width="6"/>
+
+</svg>
+
 
 <h1>RiskLens</h1>
 
@@ -103,6 +123,12 @@ RiskLens provides risk intelligence infrastructure used by banks, factoring comp
 
 </p>
 
+<p id="infra">
+
+RiskLens is designed to become core infrastructure used by banks, financial institutions, and global fintech platforms.
+
+</p>
+
 <div class="badge">
 
 Risk Score Example: 85 / LOW RISK
@@ -116,7 +142,9 @@ Risk Score Example: 85 / LOW RISK
 <div class="card">
 
 <h2 id="platformTitle">
+
 RiskLens Platform Vision
+
 </h2>
 
 <p id="platformDesc">
@@ -183,7 +211,7 @@ Business Model
 
 <li>API licensing</li>
 
-<li>Risk analysis licensing</li>
+<li>Risk intelligence licensing</li>
 
 <li>Fraud detection licensing</li>
 
@@ -208,9 +236,7 @@ Business Model
 <br>
 
 <a class="button"
-
 href="https://mehmetaltas.github.io/invoice-risklens/"
-
 target="_blank">
 
 Open Live Demo
@@ -240,12 +266,16 @@ document.getElementById("desc").innerHTML=
 
 "RiskLens küresel risk zekası altyapısıdır. Faturaları analiz eder, sahteciliği tespit eder ve risk skoru üretir. RiskLens kredi vermez.";
 
+document.getElementById("infra").innerHTML=
+
+"RiskLens bankalar ve finans kurumları için küresel altyapı olarak tasarlanmıştır.";
+
 document.getElementById("platformTitle").innerHTML=
 "RiskLens Platformu";
 
 document.getElementById("platformDesc").innerHTML=
 
-"RiskLens tek ürün değildir. RiskLens küresel risk altyapısıdır.";
+"RiskLens tek ürün değildir. Küresel altyapı platformudur.";
 
 document.getElementById("platformDesc2").innerHTML=
 
@@ -276,5 +306,4 @@ location.reload();
 
 
 </body>
-
 </html>
