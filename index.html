@@ -2,160 +2,324 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Invoice RiskLens | Demo</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Invoice RiskLens | Investor Demo</title>
+  <meta name="description" content="Invoice RiskLens — invoice risk scoring + fraud signals (decision-support). TR/EN investor demo. Islamic finance-ready. Licensing-ready. Platform expansion." />
+
   <style>
     :root{
-      --bg:#0b1220; --card:#111a2e; --text:#e8eefc; --muted:#b7c2df;
-      --accent:#4c7dff; --good:#00d4aa; --border:rgba(255,255,255,.10);
-      --shadow: 0 10px 30px rgba(0,0,0,.35); --radius:16px;
+      --bg:#0b1220;
+      --card:#111a2e;
+      --text:#eaf0ff;
+      --muted:#b7c2df;
+      --accent:#4c7dff;
+      --good:#00d4aa;
+      --warn:#ffcc66;
+      --border:rgba(255,255,255,.10);
+      --shadow:0 14px 42px rgba(0,0,0,.38);
+      --radius:18px;
     }
     *{box-sizing:border-box}
     body{
-      margin:0; font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      background: radial-gradient(1200px 700px at 20% -10%, rgba(76,125,255,.25), transparent 60%),
-                  radial-gradient(900px 700px at 110% 10%, rgba(0,212,170,.18), transparent 55%),
-                  var(--bg);
-      color:var(--text); line-height:1.5;
+      margin:0;
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1100px 700px at 18% -10%, rgba(76,125,255,.28), transparent 60%),
+        radial-gradient(900px 700px at 110% 10%, rgba(0,212,170,.18), transparent 55%),
+        var(--bg);
+      line-height:1.55;
     }
-    .wrap{max-width:1000px;margin:0 auto;padding:22px}
-    .top{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;padding:12px 0}
-    .brand{display:flex;align-items:center;gap:10px}
-    .logo{width:40px;height:40px;border-radius:14px;background:linear-gradient(135deg,var(--accent),var(--good));box-shadow:var(--shadow)}
-    .lang{display:flex;gap:8px;align-items:center;border:1px solid var(--border);background:rgba(255,255,255,.05);padding:6px;border-radius:999px}
-    .chip{border:0;background:transparent;color:var(--muted);padding:8px 12px;border-radius:999px;cursor:pointer;font-weight:800}
+    a{color:inherit}
+    .wrap{max-width:1050px;margin:0 auto;padding:22px}
+    .top{
+      display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+      padding:10px 0 4px;
+    }
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{
+      width:44px;height:44px;border-radius:16px;
+      background:linear-gradient(135deg,var(--accent),var(--good));
+      box-shadow:var(--shadow);
+    }
+    .brand b{font-size:16px;letter-spacing:.2px}
+    .brand .sub{color:rgba(234,240,255,.7);font-size:13px;margin-top:2px}
+    .lang{
+      display:flex;gap:8px;align-items:center;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.05);
+      padding:6px;border-radius:999px;
+    }
+    .chip{
+      border:0;background:transparent;color:var(--muted);
+      padding:8px 12px;border-radius:999px;cursor:pointer;font-weight:800;
+    }
     .chip.active{background:rgba(76,125,255,.22);color:var(--text)}
-    .card{background:rgba(17,26,46,.88);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;margin:14px 0}
-    h1{margin:0 0 6px;font-size:26px}
+    .card{
+      background:rgba(17,26,46,.88);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+      margin:14px 0;
+    }
+    .hero{
+      padding:22px;
+      background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+    }
+    h1{margin:0 0 6px;font-size:30px;letter-spacing:-.3px}
     h2{margin:0 0 10px;font-size:18px}
     p{margin:8px 0;color:var(--muted)}
+    .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+    .badge{
+      font-size:12px;color:rgba(234,240,255,.78);
+      border:1px solid var(--border);
+      background:rgba(0,0,0,.16);
+      padding:6px 10px;border-radius:999px;
+    }
     .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
-    @media (max-width: 900px){.kpis{grid-template-columns:1fr}}
-    .mini{border:1px solid var(--border);background:rgba(255,255,255,.04);border-radius:14px;padding:12px}
-    .mini .t{font-size:12px;color:var(--muted);margin-bottom:4px}
-    .mini .v{font-size:16px;font-weight:950}
-    .result{display:flex;gap:18px;align-items:center;flex-wrap:wrap;border:1px solid rgba(0,212,170,.25);background:rgba(0,212,170,.08);border-radius:14px;padding:14px;margin-top:12px}
+    @media (max-width:900px){.kpis{grid-template-columns:1fr}}
+    .mini{
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      border-radius:14px;
+      padding:12px;
+    }
+    .mini .t{font-size:12px;color:rgba(234,240,255,.65);margin-bottom:4px}
+    .mini .v{font-size:16px;font-weight:950;color:var(--text)}
+    .result{
+      display:flex;gap:18px;align-items:center;flex-wrap:wrap;
+      border:1px solid rgba(0,212,170,.25);
+      background:rgba(0,212,170,.08);
+      border-radius:14px;
+      padding:14px;margin-top:12px;
+    }
     .score{font-size:56px;font-weight:1000;line-height:1;color:var(--good);letter-spacing:-1px}
     .label{font-size:18px;font-weight:950;color:var(--good)}
-    .small{font-size:13px;color:rgba(232,238,252,.72)}
-    .btnRow{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
-    a.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 12px;border-radius:12px;border:1px solid var(--border);background:rgba(255,255,255,.06);color:var(--text);text-decoration:none;font-weight:900}
-    a.btn.primary{background:rgba(76,125,255,.22);border-color:rgba(76,125,255,.45)}
-    .iframeWrap{margin-top:12px;border:1px solid var(--border);border-radius:14px;overflow:hidden;background:#fff}
-    iframe{width:100%;height:980px;border:0;display:block}
-    @media (max-width: 480px){iframe{height:1100px}}
-    footer{margin:16px 0 6px;text-align:center;color:rgba(233,240,255,.55);font-size:12px}
+    .small{font-size:13px;color:rgba(234,240,255,.72)}
+    .warnBox{
+      border:1px solid rgba(255,204,102,.25);
+      background:rgba(255,204,102,.10);
+      border-radius:14px;padding:12px;margin-top:12px;
+      color:rgba(234,240,255,.85);
+    }
+    .infoBox{
+      border:1px solid rgba(76,125,255,.28);
+      background:rgba(76,125,255,.10);
+      border-radius:14px;padding:12px;margin-top:12px;
+      color:rgba(234,240,255,.88);
+    }
+    .bullets{margin:10px 0 0 18px;color:var(--muted)}
+    .bullets li{margin:6px 0}
+    .btnRow{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      padding:10px 12px;border-radius:12px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.06);
+      text-decoration:none;font-weight:900;color:var(--text);
+    }
+    .btn.primary{background:rgba(76,125,255,.22);border-color:rgba(76,125,255,.45)}
+    .btn.good{background:rgba(0,212,170,.14);border-color:rgba(0,212,170,.30)}
+    .twoCol{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    @media (max-width:900px){.twoCol{grid-template-columns:1fr}}
+    .footer{margin:16px 0 6px;text-align:center;color:rgba(233,240,255,.55);font-size:12px}
     .hide{display:none}
   </style>
 </head>
+
 <body>
   <div class="wrap">
     <div class="top">
       <div class="brand">
-        <div class="logo"></div>
+        <div class="logo" aria-hidden="true"></div>
         <div>
-          <div style="font-weight:900">Invoice RiskLens</div>
-          <div class="small">Investor Demo • TR/EN</div>
+          <b>Invoice RiskLens</b>
+          <div class="sub">Investor Demo • Risk Score + Fraud Signals • Islamic Finance-ready</div>
         </div>
       </div>
-      <div class="lang">
+
+      <div class="lang" aria-label="Language">
         <button class="chip active" id="btnTR" type="button">TR</button>
         <button class="chip" id="btnEN" type="button">EN</button>
       </div>
     </div>
 
-    <div class="card">
+    <div class="card hero">
       <div id="TR">
-        <h1>Fatura Yükle → Dolandırıcılık & Risk Analizi Al</h1>
-        <p>Demo: Faturayı yükleyin → RiskLens risk skoru + sahtecilik sinyalleri üretir (karar destek, finansman değil).</p>
+        <h1>Fatura Risk Analizi (Karar Destek) — Demo</h1>
+        <p>
+          Invoice RiskLens; bankalar, faktoring şirketleri, fonlar ve <b>katılım bankaları</b> için
+          <b>fatura risk skoru</b> ve <b>dolandırıcılık sinyalleri</b> üreten bir <b>altyapı ürünüdür</b>.
+          RiskLens <b>para vermez</b> ve <b>kredi vermez</b> — sadece karar kalitesini yükseltir.
+        </p>
+
+        <div class="badges">
+          <span class="badge">B2B / KOBİ</span>
+          <span class="badge">Risk Score</span>
+          <span class="badge">Fraud Signals</span>
+          <span class="badge">Katılım Uyum</span>
+          <span class="badge">SaaS + API + Lisans</span>
+          <span class="badge">Platform (Çoklu Ürün)</span>
+        </div>
 
         <div class="kpis">
-          <div class="mini"><div class="t">Rol</div><div class="v">Karar Destek</div></div>
-          <div class="mini"><div class="t">Çıktılar</div><div class="v">Risk Skoru + Fraud</div></div>
-          <div class="mini"><div class="t">Ödeme</div><div class="v">RiskLens ödeme yapmaz</div></div>
+          <div class="mini"><div class="t">Rol</div><div class="v">Karar Destek Altyapısı</div></div>
+          <div class="mini"><div class="t">Müşteri</div><div class="v">Banka • Katılım • Faktoring</div></div>
+          <div class="mini"><div class="t">Gelir</div><div class="v">SaaS • API • Lisans</div></div>
         </div>
 
         <div class="result">
           <div class="score">85</div>
           <div>
-            <div class="label">DÜŞÜK RİSK (LOW RISK)</div>
+            <div class="label">DÜŞÜK RİSK (Demo)</div>
             <div class="small">
-              Dolandırıcılık Olasılığı: %8 • Fatura Doğruluğu: Onaylandı • Alıcı Risk Seviyesi: Düşük<br/>
-              Öneri: Finansman için uygun (kurum kararı)
+              Fraud Olasılığı: %8 • Fatura Doğruluğu: Doğrulandı (simülasyon) • Öneri: Finansmana uygun (kurum kararı)
             </div>
           </div>
         </div>
 
+        <div class="infoBox">
+          <b>Katılım bankacılığı farkı:</b> RiskLens “faizli kredi” vermez; <b>risk analizi ve uyum katmanı</b> sağlar.
+          Katılım bankalarında “işlem gerçek mi, fatura gerçek mi, mal/hizmet var mı?” doğrulaması kritik olduğu için
+          RiskLens bu doğrulamayı güçlendirir.
+        </div>
+
+        <div class="warnBox">
+          <b>Regülasyon ve algı netliği:</b> RiskLens <b>finansman veren taraf değildir</b>. Ödemeyi banka/faktoring/fon/katılım yapar.
+          RiskLens, AML/uyum ve fraud riskini azaltan karar destek motorudur.
+        </div>
+
         <div class="btnRow">
-          <a class="btn primary" target="_blank" rel="noopener"
-             href="https://docs.google.com/forms/d/e/1FAIpQLSciq-NMeKj54rH4V8AoQSDgfRVHyhXjuXVmBQwD-k2Al0tllw/viewform">
-            Formu yeni sekmede aç
+          <a class="btn primary" href="#" onclick="alert('PDF linkini buraya koyacağız: repo içine PDF yükleyince buton URL’sini değiştireceksin.'); return false;">PDF (Investor File) — İndir</a>
+          <a class="btn good"
+             href="mailto:42mehmetaltas@gmail.com?subject=Invoice%20RiskLens%20-%20Yat%C4%B1r%C4%B1mc%C4%B1%20G%C3%B6r%C3%BC%C5%9Fmesi&body=Merhaba%2C%0A%0ABen%20Mehmet%20Alta%C5%9F.%20Invoice%20RiskLens%20demo%20linki%3A%20https%3A%2F%2Fmehmetaltas.github.io%2Finvoice-risklens%2F%0A%0A1)%20Pilot%20(60-90%20g%C3%BCn)%0A2)%20Lisans%2FAPI%20modeli%0A3)%20Kat%C4%B1l%C4%B1m%20bankalar%C4%B1%20uyum%20katman%C4%B1%0A%0AG%C3%B6r%C3%BC%C5%9Fme%20i%C3%A7in%20uygun%20zaman%C4%B1n%C4%B1z%C4%B1%20payla%C5%9F%C4%B1r%20m%C4%B1s%C4%B1n%C4%B1z%3F%0A%0ASayg%C4%B1lar%C4%B1mla%2C%0AMehmet%20Alta%C5%9F">
+            Yatırımcıya Mail Aç
           </a>
         </div>
       </div>
 
       <div id="EN" class="hide">
-        <h1>Upload Invoice → Get Fraud & Risk Analysis</h1>
-        <p>Demo: Upload an invoice → RiskLens generates risk score + fraud signals (decision-support, not funding).</p>
+        <h1>Invoice Risk Intelligence (Decision Support) — Demo</h1>
+        <p>
+          Invoice RiskLens is an <b>infrastructure decision-support</b> product for banks, factoring, funds, and <b>Islamic finance institutions</b>.
+          It generates <b>invoice risk scores</b> and <b>fraud signals</b>. RiskLens <b>does not lend</b> or fund invoices — it improves decision quality.
+        </p>
+
+        <div class="badges">
+          <span class="badge">B2B / SME</span>
+          <span class="badge">Risk Score</span>
+          <span class="badge">Fraud Signals</span>
+          <span class="badge">Islamic Finance-ready</span>
+          <span class="badge">SaaS + API + Licensing</span>
+          <span class="badge">Platform (Multi-product)</span>
+        </div>
 
         <div class="kpis">
-          <div class="mini"><div class="t">Role</div><div class="v">Decision Support</div></div>
-          <div class="mini"><div class="t">Outputs</div><div class="v">Risk Score + Fraud</div></div>
-          <div class="mini"><div class="t">Funding</div><div class="v">RiskLens does not fund</div></div>
+          <div class="mini"><div class="t">Role</div><div class="v">Decision-support Infrastructure</div></div>
+          <div class="mini"><div class="t">Customers</div><div class="v">Banks • Islamic • Factoring</div></div>
+          <div class="mini"><div class="t">Revenue</div><div class="v">SaaS • API • Licensing</div></div>
         </div>
 
         <div class="result">
           <div class="score">85</div>
           <div>
-            <div class="label">LOW RISK</div>
+            <div class="label">LOW RISK (Demo)</div>
             <div class="small">
-              Fraud Probability: 8% • Invoice Authenticity: Verified • Buyer Risk Level: Low<br/>
-              Recommendation: Eligible for financing (institution decides)
+              Fraud Probability: 8% • Invoice Authenticity: Verified (simulation) • Recommendation: Eligible (institution decides)
             </div>
           </div>
         </div>
 
+        <div class="infoBox">
+          <b>Islamic finance angle:</b> RiskLens is not a lender. It provides a <b>risk analytics + compliance layer</b>.
+          Islamic finance products require strong verification that invoices represent real trade and legitimate goods/services.
+          RiskLens strengthens this verification workflow.
+        </div>
+
+        <div class="warnBox">
+          <b>Regulatory clarity:</b> RiskLens is not the funding party. Banks/factoring/funds fund invoices.
+          RiskLens reduces AML/compliance risk and fraud losses via analytics.
+        </div>
+
         <div class="btnRow">
-          <a class="btn primary" target="_blank" rel="noopener"
-             href="https://docs.google.com/forms/d/e/1FAIpQLSciq-NMeKj54rH4V8AoQSDgfRVHyhXjuXVmBQwD-k2Al0tllw/viewform">
-            Open form in a new tab
+          <a class="btn primary" href="#" onclick="alert('We will place the PDF URL here after you upload it to the repo.'); return false;">Download Investor PDF</a>
+          <a class="btn good"
+             href="mailto:42mehmetaltas@gmail.com?subject=Invoice%20RiskLens%20-%20Investor%20Call&body=Hello%2C%0A%0AI%20am%20Mehmet%20Altas.%20Demo%20link%3A%20https%3A%2F%2Fmehmetaltas.github.io%2Finvoice-risklens%2F%0A%0A1)%2060-90%20day%20pilot%20(PoC)%0A2)%20API%2FLicensing%20model%0A3)%20Islamic%20finance%20compliance%20layer%0A%0ACould%20we%20schedule%20a%20short%20call%3F%0A%0ARegards%2C%0AMehmet%20Altas">
+            Open Investor Email
           </a>
         </div>
       </div>
     </div>
 
     <div class="card">
-      <h2>Upload Invoice / Fatura Yükle</h2>
-      <p>Form mobilde sorun çıkarırsa üstteki “yeni sekmede aç” butonunu kullan.</p>
-      <div class="iframeWrap">
-        <iframe
-          src="https://docs.google.com/forms/d/e/1FAIpQLSciq-NMeKj54rH4V8AoQSDgfRVHyhXjuXVmBQwD-k2Al0tllw/viewform?embedded=true"
-          loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
-          title="Invoice RiskLens Form"></iframe>
+      <h2 id="hTR3">Lens Platform → Siber Güvenlik & Entegrasyon Vizyonu</h2>
+      <h2 id="hEN3" class="hide">Lens Platform → Cybersecurity & Integration Vision</h2>
+
+      <div id="bTR3">
+        <p>
+          RiskLens motoru zamanla “tek ürün” değil, <b>Lens Platform</b> olarak büyüyebilir: risk + fraud + uyum verilerini birleştirerek <b>çoklu modül</b> sunar.
+        </p>
+        <ul class="bullets">
+          <li><b>Fraud Lens:</b> sahtecilik sinyalleri, anomali, ağ analizi</li>
+          <li><b>Compliance Lens:</b> AML/şüpheli işlem uyarıları, risk politikası</li>
+          <li><b>Identity Lens:</b> KYC uyumu, kimlik/kurum doğrulama entegrasyonları</li>
+          <li><b>Cyber Lens:</b> API güvenliği, bot/sahte trafik, saldırı sinyalleri (platform modülü)</li>
+          <li><b>Data Lens:</b> veri bütünlüğü, log izleme, “tam izlenebilirlik” katmanı</li>
+        </ul>
+      </div>
+
+      <div id="bEN3" class="hide">
+        <p>
+          RiskLens can evolve into a <b>Lens Platform</b>: a modular suite combining risk, fraud and compliance intelligence.
+        </p>
+        <ul class="bullets">
+          <li><b>Fraud Lens:</b> signals, anomaly detection, network analysis</li>
+          <li><b>Compliance Lens:</b> AML alerts, policy-driven controls</li>
+          <li><b>Identity Lens:</b> KYC integrations, entity verification</li>
+          <li><b>Cyber Lens:</b> API security, bot/fake traffic, attack signals (module)</li>
+          <li><b>Data Lens:</b> integrity monitoring, logs, full traceability layer</li>
+        </ul>
       </div>
     </div>
 
-    <footer>© 2026 Invoice RiskLens — Demo</footer>
+    <div class="footer">© 2026 Invoice RiskLens — Mehmet Altaş (Demo)</div>
   </div>
 
   <script>
     const btnTR = document.getElementById('btnTR');
     const btnEN = document.getElementById('btnEN');
+
     const TR = document.getElementById('TR');
     const EN = document.getElementById('EN');
 
-    btnTR.addEventListener('click', () => {
-      btnTR.classList.add('active'); btnEN.classList.remove('active');
-      TR.classList.remove('hide'); EN.classList.add('hide');
-      document.documentElement.lang = 'tr';
-    });
+    const hTR3 = document.getElementById('hTR3'); const hEN3 = document.getElementById('hEN3');
+    const bTR3 = document.getElementById('bTR3'); const bEN3 = document.getElementById('bEN3');
 
-    btnEN.addEventListener('click', () => {
-      btnEN.classList.add('active'); btnTR.classList.remove('active');
-      EN.classList.remove('hide'); TR.classList.add('hide');
-      document.documentElement.lang = 'en';
-    });
+    function setLang(lang){
+      const isTR = lang === 'tr';
+      btnTR.classList.toggle('active', isTR);
+      btnEN.classList.toggle('active', !isTR);
+
+      TR.classList.toggle('hide', !isTR);
+      EN.classList.toggle('hide', isTR);
+
+      hTR3.classList.toggle('hide', !isTR);
+      hEN3.classList.toggle('hide', isTR);
+      bTR3.classList.toggle('hide', !isTR);
+      bEN3.classList.toggle('hide', isTR);
+
+      document.documentElement.lang = isTR ? 'tr' : 'en';
+      try{ localStorage.setItem('risklens_lang', isTR ? 'tr' : 'en'); }catch(e){}
+    }
+
+    btnTR.addEventListener('click', ()=>setLang('tr'));
+    btnEN.addEventListener('click', ()=>setLang('en'));
+
+    try{
+      const saved = localStorage.getItem('risklens_lang');
+      if(saved === 'en') setLang('en');
+    }catch(e){}
   </script>
 </body>
-</html>
+            </html>
