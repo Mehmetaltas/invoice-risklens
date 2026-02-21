@@ -1,176 +1,604 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Invoice RiskLens | Investor Demo</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="RiskLens — Global Risk Intelligence Infrastructure. Invoice Risk, Fraud Detection, Financial Risk, Cyber Risk, Crypto Risk." />
+  <title>RiskLens | Global Risk Intelligence</title>
+
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #111;
-      color: white;
-      padding: 20px;
+    :root{
+      --bg:#0b1220;
+      --card:#111a2e;
+      --muted:#93a4c7;
+      --text:#eaf1ff;
+      --accent:#4c7dff;
+      --accent2:#22c55e;
+      --warn:#f59e0b;
+      --danger:#ef4444;
+      --border:rgba(255,255,255,.08);
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 18px;
     }
-    .container {
-      max-width: 1000px;
-      margin: 0 auto;
-      background-color: #111a2e;
-      padding: 20px;
-      border-radius: 8px;
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background:
+        radial-gradient(1200px 700px at 20% -10%, rgba(76,125,255,.25), transparent 60%),
+        radial-gradient(900px 600px at 90% 10%, rgba(34,197,94,.18), transparent 55%),
+        radial-gradient(800px 600px at 50% 110%, rgba(245,158,11,.12), transparent 55%),
+        var(--bg);
+      color:var(--text);
+      line-height:1.55;
     }
-    .btn {
-      background-color: #4c7dff;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      text-decoration: none;
-      cursor: pointer;
+    a{color:inherit}
+    .wrap{max-width:1100px;margin:0 auto;padding:22px}
+    .topbar{
+      display:flex;align-items:center;justify-content:space-between;
+      gap:12px;padding:10px 0 6px 0;
     }
-    .btn:hover {
-      background-color: #22c55e;
+    .brand{
+      display:flex;align-items:center;gap:12px;min-width:200px;
     }
-    iframe {
-      width: 100%;
-      height: 600px;
-      border: none;
+    .logo{
+      width:44px;height:44px;border-radius:14px;overflow:hidden;
+      background:linear-gradient(135deg, rgba(76,125,255,.9), rgba(34,197,94,.75));
+      box-shadow: var(--shadow);
+      display:flex;align-items:center;justify-content:center;
     }
-    .lang {
-      display: none;
+    .logo svg{width:28px;height:28px}
+    .brand h1{font-size:18px;margin:0;letter-spacing:.6px}
+    .brand small{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+    .btns{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+    .btn{
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      padding:10px 12px;border-radius:14px;
+      font-weight:600;cursor:pointer;
+      text-decoration:none;display:inline-flex;align-items:center;gap:8px;
+      transition:.2s transform,.2s background,.2s border;
+      user-select:none;
     }
-    .lang.active {
-      display: block;
+    .btn:hover{transform:translateY(-1px);background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.14)}
+    .btn.primary{background:rgba(76,125,255,.18);border-color:rgba(76,125,255,.35)}
+    .btn.green{background:rgba(34,197,94,.14);border-color:rgba(34,197,94,.35)}
+    .btn.warn{background:rgba(245,158,11,.14);border-color:rgba(245,158,11,.35)}
+    .hero{
+      margin-top:14px;
+      padding:22px;
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      background:rgba(255,255,255,.03);
+      box-shadow: var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+    .hero::after{
+      content:"";
+      position:absolute;inset:-2px;
+      background: radial-gradient(600px 240px at 30% 0%, rgba(76,125,255,.25), transparent 60%),
+                  radial-gradient(600px 240px at 70% 0%, rgba(34,197,94,.18), transparent 60%);
+      opacity:.8;
+      pointer-events:none;
+    }
+    .hero > *{position:relative}
+    .kicker{display:inline-flex;gap:8px;align-items:center;color:var(--muted);font-weight:700;font-size:12px;letter-spacing:.7px;text-transform:uppercase}
+    .dot{width:8px;height:8px;border-radius:99px;background:var(--accent2);box-shadow:0 0 0 4px rgba(34,197,94,.15)}
+    .hero h2{font-size:32px;margin:10px 0 10px 0;line-height:1.15}
+    .hero p{margin:0;color:rgba(234,241,255,.86);max-width:900px}
+    .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:14px}
+    .card{
+      grid-column:span 12;
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      background:rgba(255,255,255,.03);
+      box-shadow: var(--shadow);
+      padding:18px;
+    }
+    .card h3{margin:0 0 10px 0;font-size:18px}
+    .muted{color:var(--muted)}
+    .pillrow{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+    .pill{
+      padding:8px 10px;border-radius:999px;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.04);
+      font-weight:700;font-size:12px;
+    }
+    .pill.green{border-color:rgba(34,197,94,.35);background:rgba(34,197,94,.10)}
+    .pill.blue{border-color:rgba(76,125,255,.35);background:rgba(76,125,255,.12)}
+    .pill.warn{border-color:rgba(245,158,11,.35);background:rgba(245,158,11,.10)}
+    .cols{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+    .list{margin:10px 0 0 0;padding-left:18px}
+    .list li{margin:6px 0;color:rgba(234,241,255,.88)}
+    .score{
+      display:flex;align-items:center;justify-content:space-between;
+      gap:12px;margin-top:10px;padding:14px;border-radius:16px;
+      border:1px solid rgba(34,197,94,.25);
+      background: linear-gradient(135deg, rgba(34,197,94,.12), rgba(76,125,255,.10));
+    }
+    .score strong{font-size:22px}
+    .badge{
+      font-weight:900;
+      padding:8px 10px;border-radius:14px;
+      background:rgba(34,197,94,.18);
+      border:1px solid rgba(34,197,94,.35);
+      color: #d6ffe6;
+      white-space:nowrap;
+    }
+    .foot{
+      margin:14px 0 0 0;
+      padding:16px;
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      background:rgba(255,255,255,.02);
+      color:var(--muted);
+      font-size:12px;
+      display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
+    }
+    .hr{height:1px;background:rgba(255,255,255,.08);margin:14px 0}
+    .twoUp{display:grid;grid-template-columns:1.1fr .9fr;gap:14px}
+    .mini{font-size:13px;color:rgba(234,241,255,.86)}
+    .contactBox{
+      display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;
+      border:1px solid rgba(76,125,255,.25);
+      background:rgba(76,125,255,.08);
+      border-radius:16px;padding:12px;
+    }
+    .contactBox code{
+      background:rgba(0,0,0,.25);
+      border:1px solid rgba(255,255,255,.10);
+      padding:6px 10px;border-radius:12px;
+    }
+    @media (max-width: 860px){
+      .cols{grid-template-columns:1fr}
+      .twoUp{grid-template-columns:1fr}
+      .hero h2{font-size:26px}
+      .btns{justify-content:flex-start}
     }
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="wrap">
     <div class="topbar">
-      <button class="btn" id="btnTR">Türkçe</button>
-      <button class="btn" id="btnEN">English</button>
-    </div>
-
-    <!-- Türkçe İçerik -->
-    <div class="lang tr active">
-      <h1>Invoice RiskLens</h1>
-      <h2>Yatırımcı Demo</h2>
-      <p>
-        Invoice RiskLens, finans kurumları ve katılım bankaları için geliştirilmiş bir altyapıdır. Risk skorlama, sahte fatura analizi ve karar destek sistemi sağlar.
-      </p>
-
-      <!-- Risk Skoru Simülasyonu -->
-      <h3>Risk Skoru Simülasyonu</h3>
-      <form>
-        <label for="invoiceAmount">Fatura Tutarı:</label>
-        <input type="number" id="invoiceAmount" name="amount" required><br><br>
-
-        <label for="invoiceDate">Fatura Tarihi:</label>
-        <input type="date" id="invoiceDate" name="date" required><br><br>
-
-        <label for="companyName">Şirket Adı:</label>
-        <input type="text" id="companyName" name="company" required><br><br>
-
-        <button type="submit" class="btn">Risk Skorunu Hesapla</button>
-      </form>
-
-      <div id="riskScoreResult">
-        <p><strong>Risk Skoru:</strong> <span id="riskScore">Henüz hesaplanmadı</span></p>
+      <div class="brand">
+        <div class="logo" aria-label="RiskLens Logo">
+          <!-- Inline SVG logo: can be used across 50+ products -->
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M12 2.5c4.9 0 8.9 4 8.9 8.9S16.9 20.3 12 20.3 3.1 16.3 3.1 11.4 7.1 2.5 12 2.5Z" stroke="white" stroke-width="1.6" opacity="0.9"/>
+            <path d="M12 6.7c2.6 0 4.7 2.1 4.7 4.7S14.6 16.1 12 16.1 7.3 14 7.3 11.4 9.4 6.7 12 6.7Z" fill="white" opacity="0.9"/>
+            <path d="M21 21l-4.2-4.2" stroke="white" stroke-width="1.6" stroke-linecap="round" opacity="0.9"/>
+          </svg>
+        </div>
+        <div>
+          <h1>RISKLENS</h1>
+          <small id="subline">Global Risk Intelligence Infrastructure</small>
+        </div>
       </div>
 
-      <script>
-        document.querySelector('form').addEventListener('submit', function(e) {
-          e.preventDefault();
-          var amount = document.getElementById('invoiceAmount').value;
-          var date = document.getElementById('invoiceDate').value;
-          var company = document.getElementById('companyName').value;
-
-          // Basit bir risk hesaplaması simülasyonu
-          var riskScore = Math.random() * 100;
-          document.getElementById('riskScore').textContent = riskScore.toFixed(2);
-        });
-      </script>
-
-      <!-- PDF Pitch Download -->
-      <h3>Yatırımcı Pitch PDF</h3>
-      <a href="https://drive.google.com/uc?export=download&id=1mbKvLr0G_hglcCIttU68LiJ-sh-Ws4Mz">
-        <button class="btn">PDF Olarak İndir</button>
-      </a>
-
-      <!-- Google Drive Dosyasını Görüntüle -->
-      <h3>Proje Sunum Dosyasını Görüntüle</h3>
-      <iframe src="https://drive.google.com/file/d/1mbKvLr0G_hglcCIttU68LiJ-sh-Ws4Mz/preview"></iframe>
+      <div class="btns">
+        <button class="btn" id="langBtn" onclick="toggleLang()">TR / EN</button>
+        <a class="btn primary" href="#demo" id="demoBtn">Demo</a>
+        <a class="btn green" href="#contact" id="contactBtn">Contact</a>
+        <!-- PDF butonu: linki buraya koy -->
+        <a class="btn warn" id="pdfBtn" href="#" target="_blank" rel="noopener">Investor PDF</a>
+      </div>
     </div>
 
-    <!-- English Content -->
-    <div class="lang en">
-      <h1>Invoice RiskLens</h1>
-      <h2>Investor Demo</h2>
-      <p>
-        Invoice RiskLens provides risk scoring, fraud analysis, and decision support infrastructure for financial institutions and Islamic banks.
+    <section class="hero">
+      <div class="kicker"><span class="dot"></span><span id="kickerTxt">Fintech + Compliance + Fraud + AI</span></div>
+      <h2 id="heroTitle">RiskLens: Fatura, Finans, Siber ve Kripto için<br/>Risk Zekâsı Altyapısı</h2>
+      <p id="heroDesc">
+        RiskLens, para vermez ve kredi vermez. RiskLens bir “karar destek motoru”dur:
+        faturayı analiz eder, sahteciliği işaretler, risk skorunu üretir ve finans kurumunun doğru kararı vermesini sağlar.
       </p>
 
-      <!-- Risk Score Simulation -->
-      <h3>Risk Score Simulation</h3>
-      <form>
-        <label for="invoiceAmount">Invoice Amount:</label>
-        <input type="number" id="invoiceAmountEN" name="amount" required><br><br>
-
-        <label for="invoiceDate">Invoice Date:</label>
-        <input type="date" id="invoiceDateEN" name="date" required><br><br>
-
-        <label for="companyName">Company Name:</label>
-        <input type="text" id="companyNameEN" name="company" required><br><br>
-
-        <button type="submit" class="btn">Calculate Risk Score</button>
-      </form>
-
-      <div id="riskScoreResultEN">
-        <p><strong>Risk Score:</strong> <span id="riskScoreEN">Not calculated yet</span></p>
+      <div class="pillrow" style="margin-top:14px">
+        <div class="pill blue" id="pill1">Invoice Risk</div>
+        <div class="pill blue" id="pill2">Fraud Detection</div>
+        <div class="pill blue" id="pill3">Compliance / AML</div>
+        <div class="pill green" id="pill4">Islamic Finance Ready</div>
+        <div class="pill warn" id="pill5">License = High Margin</div>
       </div>
+    </section>
 
-      <script>
-        document.querySelector('form').addEventListener('submit', function(e) {
-          e.preventDefault();
-          var amount = document.getElementById('invoiceAmountEN').value;
-          var date = document.getElementById('invoiceDateEN').value;
-          var company = document.getElementById('companyNameEN').value;
+    <div class="grid">
+      <section class="card twoUp" id="demo">
+        <div>
+          <h3 id="demoTitle">Demo: Risk Skoru Simülasyonu</h3>
+          <p class="mini" id="demoText">
+            Bu demo, yatırımcıya “RiskLens’in ne yaptığını” 5 saniyede anlatır: skor üretir → sahtecilik sinyali verir → karar destek sunar.
+            (Gerçek sistemde skor, çok daha fazla veriden beslenir.)
+          </p>
 
-          // Simple risk score simulation
-          var riskScore = Math.random() * 100;
-          document.getElementById('riskScoreEN').textContent = riskScore.toFixed(2);
-        });
-      </script>
+          <div class="score">
+            <div>
+              <div class="muted" id="scoreLabel">Simulated Risk Score</div>
+              <strong>85 / 100</strong>
+              <div class="muted" id="scoreSub">Invoice: Approved • Buyer: Strong • Payment history: Positive</div>
+            </div>
+            <div class="badge" id="riskBadge">LOW RISK</div>
+          </div>
 
-      <!-- PDF Pitch Download -->
-      <h3>Investor Pitch PDF</h3>
-      <a href="https://drive.google.com/uc?export=download&id=1mbKvLr0G_hglcCIttU68LiJ-sh-Ws4Mz">
-        <button class="btn">Download as PDF</button>
-      </a>
+          <div class="hr"></div>
 
-      <!-- Google Drive File Preview -->
-      <h3>View Project Presentation File</h3>
-      <iframe src="https://drive.google.com/file/d/1mbKvLr0G_hglcCIttU68LiJ-sh-Ws4Mz/preview"></iframe>
-    </div>
+          <h3 id="howTitle">Nasıl çalışır?</h3>
+          <ul class="list" id="howList">
+            <li>KOBİ vadeli faturasını platforma yükler (veya kurumdan API ile gelir).</li>
+            <li>RiskLens: belge tutarlılığı + sahtecilik + alıcı riski + sektör riski + davranış sinyalleri analiz eder.</li>
+            <li>Sonuç: Finans kurumuna “Risk + Fraud + Uyum” raporu sunulur.</li>
+            <li>Ödemeyi RiskLens yapmaz. Ödemeyi banka / faktoring / fon / katılım bankası yapar.</li>
+          </ul>
+        </div>
 
-    <!-- Footer -->
-    <div style="margin-top:30px; text-align:center; color:gray">
-      <p>&copy; 2026 Invoice RiskLens | Investor Demo</p>
+        <div>
+          <h3 id="productsTitle">Ürün Ailesi (50 projeye hazır yapı)</h3>
+          <p class="mini muted" id="productsText">
+            RiskLens ana şirket. Altında modüler ürünler: tek ürün isteyen tekini alır; tüm platform isteyen hepsini alır.
+          </p>
+          <div class="pillrow">
+            <div class="pill">RiskLens Invoice</div>
+            <div class="pill">RiskLens FraudShield</div>
+            <div class="pill">RiskLens Finance</div>
+            <div class="pill">RiskLens Compliance</div>
+            <div class="pill">RiskLens Cyber</div>
+            <div class="pill">RiskLens Crypto</div>
+          </div>
+
+          <div class="hr"></div>
+
+          <h3 id="bizTitle">Gelir modeli</h3>
+          <ul class="list" id="bizList">
+            <li>Kurumsal abonelik (bankalar / faktoring / fonlar)</li>
+            <li>İşlem başı ücret (risk skoru / rapor / doğrulama)</li>
+            <li>API lisansı (yüksek marj, ölçeklenebilir)</li>
+            <li>Uyum paketleri (AML / KYC / şüpheli işlem uyarıları)</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="card">
+        <h3 id="islamicTitle">Katılım Bankacılığı (Faizsiz finans) uyumu neden güçlü?</h3>
+        <p class="mini" id="islamicText">
+          RiskLens ödeme yapmadığı için “faizli kredi” gibi konumlanmaz. Katılım bankası, kendi ürün yapısına uygun şekilde
+          (ör. mal/hizmet temelli, gerçek ticaret doğrulaması, risk & sahtecilik kontrolü) karar verir. RiskLens burada
+          <b>doğrulama + risk zekâsı</b> sağlar.
+        </p>
+
+        <div class="cols" style="margin-top:12px">
+          <div>
+            <h3 id="shariaTitle">Şeriat uyumu açısından net ayrım</h3>
+            <ul class="list" id="shariaList">
+              <li>RiskLens para vermez → kredi vermez → sadece karar destek sağlar.</li>
+              <li>Gerçek ticaret / belge doğruluğu / mal-hizmet tutarlılığı analiz edilir.</li>
+              <li>Katılım bankası isterse kendi yöntemleriyle (kendi ürün yapısında) fonlama yapar.</li>
+            </ul>
+          </div>
+          <div>
+            <h3 id="licenseTitle">Lisans alındığında neden getiri büyür?</h3>
+            <ul class="list" id="licenseList">
+              <li>API lisansı = tekrarlı gelir + yüksek brüt marj</li>
+              <li>Bir bankaya entegre olunca ölçek hızlı artar</li>
+              <li>Her yeni “kontrol paneli” yeni gelir kalemi demek</li>
+              <li>Ürün ailesi büyüdükçe cross-sell mümkün olur</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h3 id="aiTitle">Yapay zekâ RiskLens’e nasıl bağlanır?</h3>
+        <p class="mini" id="aiText">
+          AI, “insanın göremediği anomaliyi” yakalamak için kullanılır. RiskLens’te AI; skorun yerine geçmez, skoru güçlendirir:
+          sahte fatura kalıpları, anormal davranış, zincirleme risk, benzer dolandırıcılık örüntüleri, risk trendleri.
+        </p>
+        <div class="cols" style="margin-top:12px">
+          <div>
+            <h3 id="aiListTitle">AI kullanım alanları</h3>
+            <ul class="list" id="aiList">
+              <li>Belge tutarlılığı ve anomali tespiti (pattern / outlier)</li>
+              <li>Alıcı-satıcı ağ analizi (network risk)</li>
+              <li>Şüpheli işlem sinyali (AML risk) — “erken uyarı”</li>
+              <li>Skor açıklanabilirliği (neden 85 verdik?)</li>
+            </ul>
+          </div>
+          <div>
+            <h3 id="aiInvestorTitle">Yatırımcı etkisi</h3>
+            <ul class="list" id="aiInvestorList">
+              <li>Demo: “85 / Low Risk” gibi net çıktı, ikna gücünü artırır.</li>
+              <li>AI + lisans modeli = “platform şirketi” değerlemesi.</li>
+              <li>Regülasyonlar ağırlaştıkça risk motoru zorunlu altyapı olur.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h3 id="resTitle">Kriz senaryoları: siber saldırı, internet yok, savaş, enerji kesintisi</h3>
+        <p class="mini" id="resText">
+          Yatırımcı “sistem çökünce ne olur?” diye sorar. RiskLens bu soruya altyapı tasarımıyla cevap verir:
+          yedekli mimari, offline iş kuyruğu, güvenli kayıt, felaket kurtarma, çoklu bölge.
+        </p>
+        <div class="cols" style="margin-top:12px">
+          <div>
+            <h3 id="secTitle">Siber güvenlik</h3>
+            <ul class="list" id="secList">
+              <li>WAF + DDoS koruması + rate limit</li>
+              <li>Şifreleme (at-rest + in-transit)</li>
+              <li>Audit logs + tam izlenebilirlik</li>
+              <li>Yetkilendirme: role-based access</li>
+            </ul>
+          </div>
+          <div>
+            <h3 id="drTitle">Felaket kurtarma</h3>
+            <ul class="list" id="drList">
+              <li>Çoklu bölge / yedekli servis</li>
+              <li>İş kuyruğu: internet gelince devam</li>
+              <li>Offline rapor çıktısı (PDF/JSON)</li>
+              <li>Kritik veriler için düzenli snapshot</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="card" id="contact">
+        <h3 id="contactTitle">İletişim</h3>
+        <div class="contactBox">
+          <div>
+            <div class="muted" id="emailLabel">Email</div>
+            <code>42mehmetaltas@gmail.com</code>
+          </div>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <a class="btn primary" href="mailto:42mehmetaltas@gmail.com?subject=RiskLens%20-%20Investor%20Interest" id="mailBtn">Mail gönder</a>
+            <a class="btn" href="https://mehmetaltas.github.io/invoice-risklens/" target="_blank" rel="noopener">Live Demo Link</a>
+          </div>
+        </div>
+
+        <p class="mini muted" style="margin-top:12px" id="domainHint">
+          Not: Yatırımcı güvenini artırmak için bir sonraki adım: risklens.ai / risklens.io gibi domain + kurumsal email (founder@risklens.ai).
+        </p>
+      </section>
+
+      <div class="foot">
+        <div>© <span id="year"></span> RiskLens — All rights reserved.</div>
+        <div class="muted" id="footNote">RiskLens ödeme yapmaz; karar destek altyapısıdır.</div>
+      </div>
     </div>
   </div>
 
   <script>
-    const btnTR = document.getElementById('btnTR');
-    const btnEN = document.getElementById('btnEN');
+    document.getElementById("year").textContent = new Date().getFullYear();
 
-    btnTR.addEventListener('click', function() {
-      document.querySelector('.tr').classList.add('active');
-      document.querySelector('.en').classList.remove('active');
-    });
+    // PDF linkini buraya yapıştır (istersen):
+    // Örn: document.getElementById("pdfBtn").href = "https://drive.google.com/....";
+    // Şimdilik boş: tıklayınca sayfa üstüne dönmesin diye engelleyelim.
+    const pdfBtn = document.getElementById("pdfBtn");
+    pdfBtn.addEventListener("click", (e)=>{ if(!pdfBtn.getAttribute("href") || pdfBtn.getAttribute("href")==="#"){ e.preventDefault(); alert("PDF linkini buraya ekleyebilirsin (Investor PDF butonu)."); } });
 
-    btnEN.addEventListener('click', function() {
-      document.querySelector('.en').classList.add('active');
-      document.querySelector('.tr').classList.remove('active');
-    });
+    let lang = "tr";
+    const T = {
+      tr: {
+        subline:"Global Risk Intelligence Infrastructure",
+        kickerTxt:"Fintech + Uyum + Sahtecilik + AI",
+        heroTitle:"RiskLens: Fatura, Finans, Siber ve Kripto için<br/>Risk Zekâsı Altyapısı",
+        heroDesc:"RiskLens, para vermez ve kredi vermez. RiskLens bir “karar destek motoru”dur: faturayı analiz eder, sahteciliği işaretler, risk skorunu üretir ve finans kurumunun doğru kararı vermesini sağlar.",
+        pill1:"Invoice Risk", pill2:"Fraud Detection", pill3:"Compliance / AML", pill4:"Islamic Finance Ready", pill5:"License = High Margin",
+        demoBtn:"Demo", contactBtn:"Contact",
+        demoTitle:"Demo: Risk Skoru Simülasyonu",
+        demoText:"Bu demo, yatırımcıya “RiskLens’in ne yaptığını” 5 saniyede anlatır: skor üretir → sahtecilik sinyali verir → karar destek sunar. (Gerçek sistemde skor, çok daha fazla veriden beslenir.)",
+        scoreLabel:"Simulated Risk Score",
+        scoreSub:"Fatura: Onaylı • Alıcı: Güçlü • Ödeme geçmişi: Pozitif",
+        riskBadge:"DÜŞÜK RİSK",
+        howTitle:"Nasıl çalışır?",
+        howList:[
+          "KOBİ vadeli faturasını platforma yükler (veya kurumdan API ile gelir).",
+          "RiskLens: belge tutarlılığı + sahtecilik + alıcı riski + sektör riski + davranış sinyalleri analiz eder.",
+          "Sonuç: Finans kurumuna “Risk + Fraud + Uyum” raporu sunulur.",
+          "Ödemeyi RiskLens yapmaz. Ödemeyi banka / faktoring / fon / katılım bankası yapar."
+        ],
+        productsTitle:"Ürün Ailesi (50 projeye hazır yapı)",
+        productsText:"RiskLens ana şirket. Altında modüler ürünler: tek ürün isteyen tekini alır; tüm platform isteyen hepsini alır.",
+        bizTitle:"Gelir modeli",
+        bizList:[
+          "Kurumsal abonelik (bankalar / faktoring / fonlar)",
+          "İşlem başı ücret (risk skoru / rapor / doğrulama)",
+          "API lisansı (yüksek marj, ölçeklenebilir)",
+          "Uyum paketleri (AML / KYC / şüpheli işlem uyarıları)"
+        ],
+        islamicTitle:"Katılım Bankacılığı (Faizsiz finans) uyumu neden güçlü?",
+        islamicText:"RiskLens ödeme yapmadığı için “faizli kredi” gibi konumlanmaz. Katılım bankası, kendi ürün yapısına uygun şekilde (ör. gerçek ticaret doğrulaması, risk & sahtecilik kontrolü) karar verir. RiskLens burada doğrulama + risk zekâsı sağlar.",
+        shariaTitle:"Şeriat uyumu açısından net ayrım",
+        shariaList:[
+          "RiskLens para vermez → kredi vermez → sadece karar destek sağlar.",
+          "Gerçek ticaret / belge doğruluğu / mal-hizmet tutarlılığı analiz edilir.",
+          "Katılım bankası isterse kendi yöntemleriyle fonlama yapar."
+        ],
+        licenseTitle:"Lisans alındığında neden getiri büyür?",
+        licenseList:[
+          "API lisansı = tekrarlı gelir + yüksek brüt marj",
+          "Bir bankaya entegre olunca ölçek hızlı artar",
+          "Her yeni “kontrol paneli” yeni gelir kalemi demek",
+          "Ürün ailesi büyüdükçe cross-sell mümkün olur"
+        ],
+        aiTitle:"Yapay zekâ RiskLens’e nasıl bağlanır?",
+        aiText:"AI, “insanın göremediği anomaliyi” yakalamak için kullanılır. RiskLens’te AI; skorun yerine geçmez, skoru güçlendirir: sahte fatura kalıpları, anormal davranış, zincirleme risk, benzer dolandırıcılık örüntüleri, risk trendleri.",
+        aiListTitle:"AI kullanım alanları",
+        aiList:[
+          "Belge tutarlılığı ve anomali tespiti (pattern / outlier)",
+          "Alıcı-satıcı ağ analizi (network risk)",
+          "Şüpheli işlem sinyali (AML risk) — erken uyarı",
+          "Skor açıklanabilirliği (neden 85 verdik?)"
+        ],
+        aiInvestorTitle:"Yatırımcı etkisi",
+        aiInvestorList:[
+          "Demo: “85 / Low Risk” gibi net çıktı, ikna gücünü artırır.",
+          "AI + lisans modeli = platform şirketi değerlemesi.",
+          "Regülasyonlar ağırlaştıkça risk motoru zorunlu altyapı olur."
+        ],
+        resTitle:"Kriz senaryoları: siber saldırı, internet yok, savaş, enerji kesintisi",
+        resText:"Yatırımcı “sistem çökünce ne olur?” diye sorar. RiskLens bu soruya altyapı tasarımıyla cevap verir: yedekli mimari, offline iş kuyruğu, güvenli kayıt, felaket kurtarma, çoklu bölge.",
+        secTitle:"Siber güvenlik",
+        secList:["WAF + DDoS koruması + rate limit","Şifreleme (at-rest + in-transit)","Audit logs + tam izlenebilirlik","Yetkilendirme: role-based access"],
+        drTitle:"Felaket kurtarma",
+        drList:["Çoklu bölge / yedekli servis","İş kuyruğu: internet gelince devam","Offline rapor çıktısı (PDF/JSON)","Kritik veriler için düzenli snapshot"],
+        contactTitle:"İletişim",
+        emailLabel:"Email",
+        mailBtn:"Mail gönder",
+        domainHint:"Not: Yatırımcı güvenini artırmak için bir sonraki adım: risklens.ai / risklens.io gibi domain + kurumsal email (founder@risklens.ai).",
+        footNote:"RiskLens ödeme yapmaz; karar destek altyapısıdır."
+      },
+      en: {
+        subline:"Global Risk Intelligence Infrastructure",
+        kickerTxt:"Fintech + Compliance + Fraud + AI",
+        heroTitle:"RiskLens: Risk Intelligence Infrastructure<br/>for Invoice, Finance, Cyber & Crypto",
+        heroDesc:"RiskLens does not pay invoices and does not lend money. RiskLens is a decision-support engine: it analyzes invoices, flags fraud signals, generates a risk score, and helps financial institutions make the right decision.",
+        pill1:"Invoice Risk", pill2:"Fraud Detection", pill3:"Compliance / AML", pill4:"Islamic Finance Ready", pill5:"License = High Margin",
+        demoBtn:"Demo", contactBtn:"Contact",
+        demoTitle:"Demo: Risk Score Simulation",
+        demoText:"This demo explains RiskLens in 5 seconds: score → fraud signals → decision support. (In production, the score uses many more data sources.)",
+        scoreLabel:"Simulated Risk Score",
+        scoreSub:"Invoice: Approved • Buyer: Strong • Payment history: Positive",
+        riskBadge:"LOW RISK",
+        howTitle:"How it works",
+        howList:[
+          "SME uploads a term invoice (or it arrives via API).",
+          "RiskLens analyzes document consistency + fraud + buyer risk + sector risk + behavioral signals.",
+          "Output: “Risk + Fraud + Compliance” report is shown to the financial institution.",
+          "RiskLens never pays. The payer is a bank / factoring / fund / Islamic bank."
+        ],
+        productsTitle:"Product Family (Built for 50+ products)",
+        productsText:"RiskLens is the parent company. Modular products under it: investors can back one module or the whole platform.",
+        bizTitle:"Revenue model",
+        bizList:[
+          "Enterprise subscription (banks / factoring / funds)",
+          "Per-transaction fee (score / report / verification)",
+          "API licensing (high margin, scalable)",
+          "Compliance packages (AML / KYC / suspicious alerts)"
+        ],
+        islamicTitle:"Why Islamic finance readiness matters",
+        islamicText:"Because RiskLens does not provide loans, it is not positioned as interest-based credit. Islamic banks can use RiskLens for trade validation, fraud prevention, and risk intelligence — then decide using their own compliant structures.",
+        shariaTitle:"Clear separation for Sharia compliance",
+        shariaList:[
+          "RiskLens does not lend money — it only provides decision support.",
+          "Trade reality / document integrity / goods-service consistency are checked.",
+          "The Islamic bank funds using its own compliant structure if it chooses."
+        ],
+        licenseTitle:"Why licensing scales revenue",
+        licenseList:[
+          "API licensing = recurring revenue + high gross margin",
+          "Once integrated with a bank, growth scales fast",
+          "Every new dashboard = a new revenue stream",
+          "Cross-sell becomes natural as products expand"
+        ],
+        aiTitle:"How AI connects to RiskLens",
+        aiText:"AI is used to detect anomalies humans miss. In RiskLens, AI does not replace the score — it strengthens it: fake-invoice patterns, abnormal behavior, cascading risk, similar fraud clusters, risk trends.",
+        aiListTitle:"AI use cases",
+        aiList:[
+          "Document consistency & anomaly detection (pattern / outlier)",
+          "Network risk (buyer-seller graph analysis)",
+          "AML risk signals — early warning",
+          "Explainability (why did we score 85?)"
+        ],
+        aiInvestorTitle:"Investor impact",
+        aiInvestorList:[
+          "A clear output like “85 / Low Risk” increases trust and conversion.",
+          "AI + licensing = platform-company valuation narrative.",
+          "As regulations tighten, risk engines become mandatory infrastructure."
+        ],
+        resTitle:"Crisis scenarios: cyberattack, no internet, war, power outage",
+        resText:"Investors ask: what happens if the system fails? RiskLens answers with infrastructure design: redundancy, offline job queue, secure logging, disaster recovery, multi-region.",
+        secTitle:"Cyber security",
+        secList:["WAF + DDoS protection + rate limiting","Encryption (at-rest + in-transit)","Audit logs & full traceability","Role-based access control"],
+        drTitle:"Disaster recovery",
+        drList:["Multi-region redundancy","Job queue resumes when internet returns","Offline report export (PDF/JSON)","Regular snapshots for critical data"],
+        contactTitle:"Contact",
+        emailLabel:"Email",
+        mailBtn:"Send email",
+        domainHint:"Note: next step to improve investor trust: domain like risklens.ai / risklens.io + corporate email (founder@risklens.ai).",
+        footNote:"RiskLens does not pay; it is decision-support infrastructure."
+      }
+    };
+
+    function setText(id, txt){ const el=document.getElementById(id); if(el) el.innerHTML = txt; }
+    function setList(id, arr){
+      const el=document.getElementById(id);
+      if(!el) return;
+      el.innerHTML = arr.map(x=>`<li>${x}</li>`).join("");
+    }
+
+    function applyLang(){
+      const t = T[lang];
+      setText("subline", t.subline);
+      setText("kickerTxt", t.kickerTxt);
+      setText("heroTitle", t.heroTitle);
+      setText("heroDesc", t.heroDesc);
+      setText("pill1", t.pill1);
+      setText("pill2", t.pill2);
+      setText("pill3", t.pill3);
+      setText("pill4", t.pill4);
+      setText("pill5", t.pill5);
+
+      setText("demoBtn", t.demoBtn);
+      setText("contactBtn", t.contactBtn);
+
+      setText("demoTitle", t.demoTitle);
+      setText("demoText", t.demoText);
+      setText("scoreLabel", t.scoreLabel);
+      setText("scoreSub", t.scoreSub);
+      setText("riskBadge", t.riskBadge);
+
+      setText("howTitle", t.howTitle);
+      setList("howList", t.howList);
+
+      setText("productsTitle", t.productsTitle);
+      setText("productsText", t.productsText);
+
+      setText("bizTitle", t.bizTitle);
+      setList("bizList", t.bizList);
+
+      setText("islamicTitle", t.islamicTitle);
+      setText("islamicText", t.islamicText);
+
+      setText("shariaTitle", t.shariaTitle);
+      setList("shariaList", t.shariaList);
+
+      setText("licenseTitle", t.licenseTitle);
+      setList("licenseList", t.licenseList);
+
+      setText("aiTitle", t.aiTitle);
+      setText("aiText", t.aiText);
+
+      setText("aiListTitle", t.aiListTitle);
+      setList("aiList", t.aiList);
+
+      setText("aiInvestorTitle", t.aiInvestorTitle);
+      setList("aiInvestorList", t.aiInvestorList);
+
+      setText("resTitle", t.resTitle);
+      setText("resText", t.resText);
+
+      setText("secTitle", t.secTitle);
+      setList("secList", t.secList);
+
+      setText("drTitle", t.drTitle);
+      setList("drList", t.drList);
+
+      setText("contactTitle", t.contactTitle);
+      setText("emailLabel", t.emailLabel);
+      setText("mailBtn", t.mailBtn);
+      setText("domainHint", t.domainHint);
+      setText("footNote", t.footNote);
+
+      document.documentElement.lang = (lang === "tr" ? "tr" : "en");
+    }
+
+    function toggleLang(){
+      lang = (lang === "tr") ? "en" : "tr";
+      applyLang();
+    }
+
+    applyLang();
   </script>
 </body>
 </html>
