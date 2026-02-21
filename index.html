@@ -1,58 +1,71 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Invoice RiskLens | Investor Demo</title>
+<title>Invoice RiskLens | AI Invoice Risk Intelligence</title>
 
 <style>
 
+:root{
+--bg:#0b1220;
+--card:#111a2e;
+--accent:#4c7dff;
+--accent2:#00d4aa;
+--text:#ffffff;
+--text2:#9fb0d0;
+}
+
 body{
-background:#0b1220;
-color:white;
-font-family:Arial;
 margin:0;
-padding:20px;
+font-family:Arial, sans-serif;
+background:var(--bg);
+color:var(--text);
 }
 
 .container{
-max-width:900px;
+max-width:1000px;
 margin:auto;
-background:#111a2e;
-padding:30px;
-border-radius:10px;
+padding:20px;
+}
+
+.card{
+background:var(--card);
+padding:20px;
+border-radius:12px;
+margin-bottom:20px;
 }
 
 h1{
-color:#4c7dff;
+color:var(--accent2);
 }
 
 h2{
-color:#00d4aa;
+color:var(--accent);
+}
+
+.risk-box{
+background:#0f1c35;
+padding:20px;
+border-radius:10px;
+margin-top:15px;
 }
 
 .score{
-font-size:70px;
-color:#00d4aa;
+font-size:48px;
+color:#00ff9c;
 font-weight:bold;
 }
 
-.button{
-display:inline-block;
-background:#4c7dff;
-padding:15px;
-color:white;
-text-decoration:none;
-border-radius:8px;
-margin-top:20px;
+.low{
+color:#00ff9c;
 }
 
-.langbtn{
-padding:10px;
-margin-right:10px;
-cursor:pointer;
+.footer{
+margin-top:40px;
+text-align:center;
+color:var(--text2);
 }
 
 </style>
@@ -63,131 +76,166 @@ cursor:pointer;
 
 <div class="container">
 
-<button class="langbtn" onclick="showTR()">Türkçe</button>
-<button class="langbtn" onclick="showEN()">English</button>
+<h1>Invoice RiskLens</h1>
 
-<div id="TR">
+<div class="card">
 
-<h1>Invoice RiskLens Demo</h1>
-
-<p>
-Invoice RiskLens bankalar, katılım bankaları ve finans kurumları için
-fatura risk analizi sağlayan karar destek sistemidir.
-</p>
-
-<h2>Risk Score</h2>
-
-<div class="score">
-85
-</div>
+<h2>Türkçe</h2>
 
 <p>
-Düşük Risk — Finansman için uygun
+Invoice RiskLens, vadeli faturaların sahte olup olmadığını analiz eden,
+AI destekli risk analiz platformudur.
 </p>
-
-<h2>Katılım Bankacılığı Uyumlu</h2>
 
 <p>
-RiskLens finansman vermez.
-Sadece risk analizi sağlar.
-Katılım bankaları için uygundur.
+Platform kredi vermez.  
+Sadece bankalar, katılım bankaları ve finans kurumları için risk analizi sağlar.
 </p>
 
-<h2>Lisans Gelir Modeli</h2>
+<h2>Katılım Bankacılığı Uyumu</h2>
 
 <p>
-Banka lisansı<br>
-API lisansı<br>
-SaaS modeli<br>
-Global genişleme
+
+RiskLens kredi vermez.  
+Bu nedenle faiz içermez.
+
+Bu yapı:
+
+• Katılım bankaları için uygundur  
+• Faizsiz finans modeline uygundur  
+• Helal finans prensipleri ile uyumludur  
+
 </p>
 
-<h2>Platform Genişleme</h2>
+<h2>Risk Skoru Demo</h2>
 
-<p>
-Fraud Detection<br>
-AML Compliance<br>
-Cyber Security<br>
-Identity Verification
-</p>
+<div class="risk-box">
 
-<a class="button"
-href="mailto:42mehmetaltas@gmail.com?subject=Invoice RiskLens Investment">
-Yatırımcıya Mail Gönder
-</a>
+Risk Score
 
-</div>
+<div class="score">85</div>
 
-<div id="EN" style="display:none">
-
-<h1>Invoice RiskLens Demo</h1>
-
-<p>
-Invoice RiskLens provides invoice risk scoring and fraud analysis
-for banks and Islamic finance institutions.
-</p>
-
-<h2>Risk Score</h2>
-
-<div class="score">
-85
-</div>
-
-<p>
-Low Risk — Eligible for financing
-</p>
-
-<h2>Islamic Finance Ready</h2>
-
-<p>
-RiskLens does not fund invoices.
-It provides risk analysis infrastructure.
-</p>
-
-<h2>Licensing Model</h2>
-
-<p>
-Bank license<br>
-API license<br>
-SaaS model<br>
-Global expansion
-</p>
-
-<h2>Platform Expansion</h2>
-
-<p>
-Fraud Detection<br>
-AML Compliance<br>
-Cyber Security<br>
-Identity Verification
-</p>
-
-<a class="button"
-href="mailto:42mehmetaltas@gmail.com?subject=Invoice RiskLens Investment">
-Contact Investor
-</a>
-
+<div class="low">
+Low Risk — Financing Eligible
 </div>
 
 </div>
 
-<script>
+<h2>Gelir Modeli</h2>
 
-function showTR(){
+<p>
 
-document.getElementById("TR").style.display="block";
-document.getElementById("EN").style.display="none";
+• Banka lisansı  
+• Katılım bankası lisansı  
+• Faktoring lisansı  
+• API lisansı  
+• Kurumsal lisans  
 
-}
+</p>
 
-function showEN(){
+<h2>Startup Vision</h2>
 
-document.getElementById("TR").style.display="none";
-document.getElementById("EN").style.display="block";
+<p>
 
-}
+RiskLens platformu geliştirildiğinde şu alanlara genişler:
 
-</script>
+• Fraud Detection  
+• AML Detection  
+• Cybersecurity Risk Analysis  
+• Financial Intelligence Infrastructure  
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h2>English</h2>
+
+<p>
+
+Invoice RiskLens is an AI-powered invoice risk analysis platform.
+
+It does not lend money.
+
+It provides risk intelligence infrastructure to banks and financial institutions.
+
+</p>
+
+<h2>Islamic Finance Compatible</h2>
+
+<p>
+
+RiskLens does not provide loans.
+
+It provides analysis infrastructure.
+
+This makes it fully compatible with Islamic banking.
+
+</p>
+
+<h2>Risk Score Demo</h2>
+
+<div class="risk-box">
+
+Risk Score
+
+<div class="score">85</div>
+
+<div class="low">
+Low Risk — Financing Eligible
+</div>
+
+</div>
+
+<h2>Revenue Model</h2>
+
+<p>
+
+• Bank licensing  
+• Islamic bank licensing  
+• Factoring licensing  
+• API licensing  
+• Enterprise licensing  
+
+</p>
+
+<h2>Expansion Vision</h2>
+
+<p>
+
+RiskLens expands into:
+
+• Fraud detection  
+• AML detection  
+• Cybersecurity intelligence  
+• Financial infrastructure  
+
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h2>Contact</h2>
+
+Email:  
+<br><br>
+
+<b>42mehmetaltas@gmail.com</b>
+
+</div>
+
+
+<div class="footer">
+
+Invoice RiskLens — AI Financial Intelligence Infrastructure
+
+</div>
+
+</div>
 
 </body>
 </html>
