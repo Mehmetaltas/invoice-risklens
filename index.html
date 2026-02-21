@@ -1,15 +1,18 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="tr">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Invoice RiskLens | Investor Demo</title>
 
 <style>
+
 body{
-font-family:Arial, sans-serif;
 background:#0b1220;
 color:white;
+font-family:Arial;
 margin:0;
 padding:20px;
 }
@@ -18,114 +21,99 @@ padding:20px;
 max-width:900px;
 margin:auto;
 background:#111a2e;
-padding:20px;
-border-radius:12px;
+padding:30px;
+border-radius:10px;
 }
 
-h1{color:#4c7dff}
-h2{color:#00d4aa}
+h1{
+color:#4c7dff;
+}
+
+h2{
+color:#00d4aa;
+}
 
 .score{
-font-size:60px;
+font-size:70px;
 color:#00d4aa;
 font-weight:bold;
 }
 
 .button{
 display:inline-block;
-padding:12px 18px;
 background:#4c7dff;
+padding:15px;
 color:white;
 text-decoration:none;
 border-radius:8px;
-margin-top:10px;
+margin-top:20px;
 }
 
-.section{
-margin-top:25px;
-}
-
-.lang{
-margin-bottom:20px;
+.langbtn{
+padding:10px;
+margin-right:10px;
+cursor:pointer;
 }
 
 </style>
 
 </head>
+
 <body>
 
 <div class="container">
 
-<div class="lang">
-<button onclick="setTR()">Türkçe</button>
-<button onclick="setEN()">English</button>
-</div>
+<button class="langbtn" onclick="showTR()">Türkçe</button>
+<button class="langbtn" onclick="showEN()">English</button>
 
 <div id="TR">
 
 <h1>Invoice RiskLens Demo</h1>
 
 <p>
-Invoice RiskLens, bankalar, katılım bankaları ve finans kurumları için
-fatura risk skoru ve dolandırıcılık analizi sağlayan karar destek sistemidir.
+Invoice RiskLens bankalar, katılım bankaları ve finans kurumları için
+fatura risk analizi sağlayan karar destek sistemidir.
 </p>
 
-<div class="section">
+<h2>Risk Score</h2>
 
-<h2>Risk Score (Demo)</h2>
-
-<div class="score">85</div>
-
-<p>Düşük Risk — Finansman için uygun (kurum kararı)</p>
-
+<div class="score">
+85
 </div>
 
-<div class="section">
+<p>
+Düşük Risk — Finansman için uygun
+</p>
 
 <h2>Katılım Bankacılığı Uyumlu</h2>
 
 <p>
-RiskLens finansman vermez. Sadece risk analizi sağlar.
-Katılım bankaları için uygun uyum altyapısıdır.
+RiskLens finansman vermez.
+Sadece risk analizi sağlar.
+Katılım bankaları için uygundur.
 </p>
 
-</div>
-
-<div class="section">
-
-<h2>Lisans Modeli</h2>
+<h2>Lisans Gelir Modeli</h2>
 
 <p>
-
-• Banka lisansı  
-• API lisansı  
-• SaaS gelir modeli  
-• Çoklu ülke genişleme  
-
+Banka lisansı<br>
+API lisansı<br>
+SaaS modeli<br>
+Global genişleme
 </p>
-
-</div>
-
-<div class="section">
 
 <h2>Platform Genişleme</h2>
 
 <p>
-
-RiskLens gelecekte şu alanlara genişleyebilir:
-
-• Fraud Detection  
-• AML Compliance  
-• Cyber Security Risk  
-• Identity Verification  
-
+Fraud Detection<br>
+AML Compliance<br>
+Cyber Security<br>
+Identity Verification
 </p>
-
-</div>
 
 <a class="button"
 href="mailto:42mehmetaltas@gmail.com?subject=Invoice RiskLens Investment">
-Yatırımcı Mail Gönder
+Yatırımcıya Mail Gönder
 </a>
 
 </div>
@@ -139,17 +127,15 @@ Invoice RiskLens provides invoice risk scoring and fraud analysis
 for banks and Islamic finance institutions.
 </p>
 
-<div class="section">
+<h2>Risk Score</h2>
 
-<h2>Risk Score (Demo)</h2>
-
-<div class="score">85</div>
-
-<p>Low Risk — Eligible for financing</p>
-
+<div class="score">
+85
 </div>
 
-<div class="section">
+<p>
+Low Risk — Eligible for financing
+</p>
 
 <h2>Islamic Finance Ready</h2>
 
@@ -158,39 +144,23 @@ RiskLens does not fund invoices.
 It provides risk analysis infrastructure.
 </p>
 
-</div>
-
-<div class="section">
-
 <h2>Licensing Model</h2>
 
 <p>
-
-• Bank license  
-• API license  
-• SaaS revenue  
-• Global expansion  
-
+Bank license<br>
+API license<br>
+SaaS model<br>
+Global expansion
 </p>
-
-</div>
-
-<div class="section">
 
 <h2>Platform Expansion</h2>
 
 <p>
-
-Future modules:
-
-• Fraud Detection  
-• AML Compliance  
-• Cyber Security  
-• Identity Verification  
-
+Fraud Detection<br>
+AML Compliance<br>
+Cyber Security<br>
+Identity Verification
 </p>
-
-</div>
 
 <a class="button"
 href="mailto:42mehmetaltas@gmail.com?subject=Invoice RiskLens Investment">
@@ -203,17 +173,21 @@ Contact Investor
 
 <script>
 
-function setTR(){
+function showTR(){
+
 document.getElementById("TR").style.display="block";
 document.getElementById("EN").style.display="none";
+
 }
 
-function setEN(){
+function showEN(){
+
 document.getElementById("TR").style.display="none";
 document.getElementById("EN").style.display="block";
+
 }
 
 </script>
 
 </body>
-  </html>
+</html>
