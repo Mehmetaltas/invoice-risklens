@@ -1,60 +1,204 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Invoice RiskLens | AI Invoice Risk Intelligence Platform</title>
-  <style>
-    body{font-family:Arial,system-ui; margin:0; background:#f4f6f8; color:#111;}
-    header{background:#0a2540; color:#fff; padding:26px 14px; text-align:center;}
-    .container{max-width:900px; margin:18px auto; background:#fff; padding:18px; border-radius:10px;}
-    h1,h2{margin:0 0 10px;}
-    p{margin:10px 0; line-height:1.55;}
-    .btn{display:inline-block; padding:12px 18px; background:#0a2540; color:#fff; text-decoration:none; border-radius:8px; font-weight:700;}
-    .note{color:#666; font-size:13px;}
-    iframe{width:100%; height:820px; border:0; border-radius:10px; margin-top:14px; background:#fff;}
-    footer{text-align:center; padding:18px; color:#666; font-size:12px;}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Invoice RiskLens | Invoice Risk Intelligence Platform</title>
+
+<style>
+
+body {
+font-family: Arial, sans-serif;
+margin: 0;
+background: #f4f6f8;
+color: #111;
+}
+
+header {
+background: #0a2540;
+color: white;
+padding: 30px;
+text-align: center;
+}
+
+.container {
+max-width: 900px;
+margin: auto;
+background: white;
+padding: 25px;
+margin-top: 20px;
+border-radius: 10px;
+box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+h1 {
+margin: 0;
+}
+
+h2 {
+margin-top: 25px;
+color: #0a2540;
+}
+
+p {
+line-height: 1.6;
+}
+
+.button {
+display: inline-block;
+background: #0a2540;
+color: white;
+padding: 12px 20px;
+border-radius: 6px;
+text-decoration: none;
+margin-top: 10px;
+}
+
+iframe {
+width: 100%;
+height: 900px;
+border: none;
+margin-top: 20px;
+border-radius: 10px;
+}
+
+footer {
+text-align: center;
+padding: 20px;
+color: #666;
+font-size: 14px;
+}
+
+.lang-buttons {
+text-align: center;
+margin-top: 10px;
+}
+
+.lang-buttons button {
+padding: 8px 15px;
+margin: 5px;
+border: none;
+background: #0a2540;
+color: white;
+border-radius: 5px;
+cursor: pointer;
+}
+
+</style>
+
+<script>
+
+function setLang(lang) {
+
+if(lang === "tr") {
+
+document.getElementById("tr").style.display = "block";
+document.getElementById("en").style.display = "none";
+
+}
+
+if(lang === "en") {
+
+document.getElementById("tr").style.display = "none";
+document.getElementById("en").style.display = "block";
+
+}
+
+}
+
+</script>
+
 </head>
+
 <body>
 
 <header>
-  <h1>Invoice RiskLens</h1>
-  <p>AI-Powered Invoice Risk Intelligence Platform</p>
-  <p>Yapay Zeka Destekli Fatura Risk Analizi Platformu</p>
+
+<h1>Invoice RiskLens</h1>
+
+<p>AI-Powered Invoice Risk Intelligence Platform</p>
+
+<div class="lang-buttons">
+<button onclick="setLang('tr')">Türkçe</button>
+<button onclick="setLang('en')">English</button>
+</div>
+
 </header>
 
 <div class="container">
-  <h2>Upload Invoice / Fatura Yükle</h2>
-  <p>
-    <b>EN:</b> Upload your invoice to receive fraud detection and risk analysis.<br/>
-    <b>TR:</b> Faturanızı yükleyin, sahtecilik tespiti ve risk analizini anında alın.
-  </p>
 
-  <a class="btn" target="_blank" rel="noopener"
-     href="https://docs.google.com/forms/d/e/1FAIpQLSciq-NMeKj54rH4V8AoQSDgfRVHyhXjuXVmBQwD-k2Al0tllw/viewform">
-     Open Form in New Tab
-  </a>
+<!-- TURKISH -->
 
-  <p class="note">Form aşağıda sayfanın içine gömülüdür (embedded).</p>
+<div id="tr">
 
-  <iframe
-    src="https://docs.google.com/forms/d/e/1FAIpQLSciq-NMeKj54rH4V8AoQSDgfRVHyhXjuXVmBQwD-k2Al0tllw/viewform?embedded=true"
-    loading="lazy"
-    title="Invoice RiskLens - Upload Invoice Form">
-  </iframe>
+<h2>Fatura Risk Analizi ve Sahtecilik Tespiti</h2>
 
-  <h2>How It Works / Nasıl Çalışır</h2>
-  <p>
-    • SME uploads invoice — KOBİ faturayı yükler<br/>
-    • AI analyzes fraud risk — Yapay zeka risk analizini yapar<br/>
-    • Risk score generated — Risk skoru oluşturulur<br/>
-    • Financial institutions can safely finance — Finans kurumları güvenle finansman sağlar
-  </p>
+<p>
+Invoice RiskLens, vadeli faturaların sahtecilik riskini analiz eden ve finans kurumlarına karar desteği sağlayan bir altyapıdır.
+</p>
+
+<p>
+RiskLens para vermez. Ödeme bankalar, faktoring şirketleri ve fonlar tarafından yapılır.
+</p>
+
+<h2>Nasıl Çalışır</h2>
+
+<p>
+
+• KOBİ faturayı yükler<br>
+• Sistem risk analizi yapar<br>
+• Risk skoru oluşturulur<br>
+• Finans kurumu ödeme kararı verir
+
+</p>
+
+</div>
+
+<!-- ENGLISH -->
+
+<div id="en" style="display:none;">
+
+<h2>Invoice Risk Analysis and Fraud Detection</h2>
+
+<p>
+Invoice RiskLens analyzes deferred invoices and provides risk scoring infrastructure for financial institutions.
+</p>
+
+<p>
+RiskLens does not provide funding. Banks, factoring companies, and funds provide financing.
+</p>
+
+<h2>How It Works</h2>
+
+<p>
+
+• SME uploads invoice<br>
+• System analyzes risk<br>
+• Risk score generated<br>
+• Financial institution decides funding
+
+</p>
+
+</div>
+
+
+<h2>Upload Invoice / Fatura Yükle</h2>
+
+<p>
+Use the form below to upload your invoice for risk analysis.
+</p>
+
+<iframe
+src="https://docs.google.com/forms/d/e/1FAIpQLSciq-NMeKj54rH4V8AoQSDgfRVHyhXjuXVmBQwD-k2Al0tllw/viewform?embedded=true">
+</iframe>
+
 </div>
 
 <footer>
-  © 2026 Invoice RiskLens — AI Infrastructure for Banks, Funds, and Financial Institutions
+
+© 2026 Invoice RiskLens  
+AI Infrastructure for Banks, Funds, and Financial Institutions
+
 </footer>
 
 </body>
