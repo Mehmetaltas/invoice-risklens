@@ -1,59 +1,93 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>RiskLens | Global Risk Intelligence Infrastructure</title>
+<title>RiskLens | Global Fintech Risk Intelligence</title>
 
 <style>
 
+:root{
+--bg:#070f1f;
+--card:#0f1b35;
+--accent:#4da3ff;
+--accent2:#22c55e;
+--text:#ffffff;
+--muted:#9fb0d0;
+}
+
 body{
-background:#0b1220;
-color:white;
-font-family:Arial;
 margin:0;
-padding:0;
+font-family:Arial, sans-serif;
+background:linear-gradient(180deg,#070f1f,#020617);
+color:var(--text);
 }
 
 .container{
-max-width:1000px;
+max-width:900px;
 margin:auto;
-padding:40px;
+padding:20px;
+}
+
+.logo{
+font-size:32px;
+font-weight:bold;
+color:var(--accent);
+}
+
+.lang{
+margin-top:10px;
+}
+
+button{
+background:var(--accent);
+border:none;
+padding:8px 14px;
+color:white;
+border-radius:6px;
+cursor:pointer;
+margin-right:5px;
 }
 
 .card{
-background:#111a2e;
+background:var(--card);
 padding:20px;
 margin-top:20px;
-border-radius:10px;
+border-radius:12px;
 }
 
-h1{
-color:#4c7dff;
-}
-
-h2{
-color:#22c55e;
-}
-
-.highlight{
-color:#22c55e;
-font-size:28px;
+.score{
+font-size:40px;
+color:var(--accent2);
 font-weight:bold;
 }
 
-.button{
-background:#4c7dff;
-padding:12px;
-display:inline-block;
-margin-top:10px;
-border-radius:6px;
-color:white;
-text-decoration:none;
+.small{
+color:var(--muted);
+}
+
+.footer{
+margin-top:40px;
+font-size:14px;
+color:#7f9bd1;
 }
 
 </style>
+
+<script>
+
+function setLang(lang){
+
+document.getElementById("tr").style.display =
+(lang==="tr")?"block":"none";
+
+document.getElementById("en").style.display =
+(lang==="en")?"block":"none";
+
+}
+
+</script>
 
 </head>
 
@@ -61,14 +95,110 @@ text-decoration:none;
 
 <div class="container">
 
-<h1>RiskLens</h1>
+<div class="logo">
+RiskLens
+</div>
+
+<div class="lang">
+<button onclick="setLang('tr')">Türkçe</button>
+<button onclick="setLang('en')">English</button>
+</div>
+
+<!-- TURKISH -->
+<div id="tr">
+
+<div class="card">
+
+<h2>Global Fintech ve Katılım Finans Risk Zekası Altyapısı</h2>
+
+<p>
+RiskLens, bankalar, fintech şirketleri ve katılım bankaları için geliştirilmiş global risk analiz altyapısıdır.
+</p>
+
+<p>
+Vadeli faturalar, finansal işlemler ve dijital varlıklar üzerinde sahtecilik, manipülasyon ve risk analizini gerçek zamanlı yapar.
+</p>
+
+<p>
+RiskLens kredi vermez. Risk analizi yapar. Kararı finans kurumu verir.
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>Risk Skoru Simülasyonu</h2>
+
+<p class="small">
+Fatura ID: INV-2026-RL-001
+</p>
+
+<div class="score">
+85 / DÜŞÜK RİSK
+</div>
+
+<p>
+Sahtecilik sinyali bulunamadı
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>Katılım Bankacılığı Uyumlu</h2>
+
+<p>
+RiskLens faiz içermez.
+</p>
+
+<p>
+Katılım bankalarının Murabaha, Mudaraba ve Ticaret finansman modellerine uygundur.
+</p>
+
+<p>
+Faizsiz finans için özel risk motoru içerir.
+</p>
+
+</div>
+
+<div class="card">
+
+<h2>Gelir Modeli</h2>
+
+<ul>
+
+<li>Banka lisans geliri</li>
+
+<li>API kullanım geliri</li>
+
+<li>Fintech entegrasyon geliri</li>
+
+<li>Risk analizi işlem başı ücret</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<!-- ENGLISH -->
+<div id="en" style="display:none;">
 
 <div class="card">
 
 <h2>Global Fintech & Islamic Finance Risk Intelligence Infrastructure</h2>
 
 <p>
-RiskLens is a global infrastructure platform that detects invoice fraud and provides real-time risk intelligence for banks, fintech, and Islamic finance.
+RiskLens is a global risk intelligence platform for banks, fintech, and Islamic finance institutions.
+</p>
+
+<p>
+It detects fraud, analyzes invoice risk, and provides real-time financial risk intelligence.
+</p>
+
+<p>
+RiskLens does not provide loans. It provides risk intelligence.
+Financial institutions make the funding decision.
 </p>
 
 </div>
@@ -77,23 +207,17 @@ RiskLens is a global infrastructure platform that detects invoice fraud and prov
 
 <h2>Risk Score Simulation</h2>
 
-<p>Invoice ID: INV-2026-RL-001</p>
+<p class="small">
+Invoice ID: INV-2026-RL-001
+</p>
 
-<p class="highlight">85 / LOW RISK</p>
-
-<p>No fraud signals detected</p>
-
+<div class="score">
+85 / LOW RISK
 </div>
 
-<div class="card">
-
-<h2>Revenue Projection</h2>
-
-<p>Year 1: $250,000</p>
-
-<p>Year 3: $8,000,000</p>
-
-<p>Year 5: $50,000,000+</p>
+<p>
+No fraud signals detected
+</p>
 
 </div>
 
@@ -101,24 +225,49 @@ RiskLens is a global infrastructure platform that detects invoice fraud and prov
 
 <h2>Islamic Finance Compatible</h2>
 
-<p>No lending</p>
+<p>
+RiskLens is fully compatible with Islamic finance.
+</p>
 
-<p>No interest</p>
+<p>
+Supports Murabaha, Mudaraba, and trade-based financing models.
+</p>
 
-<p>Infrastructure only</p>
+<p>
+Interest-free risk intelligence infrastructure.
+</p>
 
 </div>
 
 <div class="card">
 
-<h2>Contact</h2>
+<h2>Revenue Model</h2>
 
-<p>42mehmetaltas@gmail.com</p>
+<ul>
+
+<li>Bank licensing</li>
+
+<li>API revenue</li>
+
+<li>Fintech integrations</li>
+
+<li>Risk analysis transaction fees</li>
+
+</ul>
+
+</div>
+
+</div>
+
+<div class="footer">
+
+Contact: 42mehmetaltas@gmail.com  
+<br><br>
+RiskLens Global Infrastructure
 
 </div>
 
 </div>
 
 </body>
-
 </html>
