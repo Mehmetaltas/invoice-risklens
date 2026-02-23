@@ -1,587 +1,438 @@
 <!doctype html>
-<html lang="en">
+<html lang="tr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>ZENTRA — RiskLens Investor Demo (TR/EN)</title>
-  <meta name="description" content="Zentra builds scalable intelligence infrastructure. RiskLens is the flagship transaction risk intelligence engine." />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Zentra — RiskLens | Investor & Bank Demo</title>
+  <meta name="description" content="Zentra (company) + RiskLens (risk intelligence product). TR/EN bilingual, VC & Bank/Islamic Finance demo." />
 
   <style>
     :root{
-      --bg:#070A10;
-      --panel:#0D1220;
-      --panel2:#0A0F1B;
-      --text:#EAF0FF;
-      --muted:#A7B4D6;
-      --line: rgba(255,255,255,.12);
-      --accent:#78A6FF;
-      --good:#4CE09A;
-      --warn:#FFCC66;
-      --bad:#FF6B6B;
+      --bg:#070b14;
+      --card:#0d1424;
+      --card2:#0b1220;
+      --text:#e8eefc;
+      --muted:#a8b3cc;
+      --accent:#4c7dff;
+      --good:#2dd4bf;
+      --warn:#fbbf24;
+      --bad:#fb7185;
+      --border:rgba(255,255,255,.08);
       --shadow: 0 10px 30px rgba(0,0,0,.35);
-      --radius:18px;
-      --radius2:14px;
+      --radius: 18px;
     }
     *{box-sizing:border-box}
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
-      background: radial-gradient(1200px 700px at 15% 10%, rgba(120,166,255,.20), transparent 60%),
-                  radial-gradient(900px 600px at 85% 20%, rgba(76,224,154,.12), transparent 55%),
-                  linear-gradient(180deg, #05070C, #070A10 30%, #05070C);
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1000px 600px at 15% 0%, rgba(76,125,255,.18), transparent 60%),
+                  radial-gradient(900px 520px at 85% 20%, rgba(45,212,191,.14), transparent 55%),
+                  var(--bg);
       color:var(--text);
-      line-height:1.45;
+      line-height:1.5;
     }
-    a{color:var(--accent); text-decoration:none}
-    a:hover{text-decoration:underline}
-    .wrap{max-width:1100px; margin:0 auto; padding:18px 14px 80px}
+    a{color:inherit}
+    .wrap{max-width:1100px;margin:0 auto;padding:22px 16px 60px}
     .topbar{
-      display:flex; gap:12px; align-items:center; justify-content:space-between;
-      position:sticky; top:0; z-index:5;
-      padding:10px 12px;
-      background: rgba(7,10,16,.70);
+      display:flex;gap:12px;align-items:center;justify-content:space-between;
+      position:sticky;top:0;z-index:50;
+      background: rgba(7,11,20,.72);
       backdrop-filter: blur(10px);
-      border-bottom:1px solid var(--line);
+      border-bottom:1px solid var(--border);
+      padding:10px 16px;
     }
-    .brandline{display:flex; align-items:center; gap:10px; min-width: 0; flex-wrap:wrap}
-    .zentraLogo{
-      height:32px; width:auto;
-      filter: drop-shadow(0 6px 18px rgba(120,166,255,.18));
+    .brand{
+      display:flex;align-items:center;gap:12px;min-width:240px;
     }
+    .logos{display:flex;align-items:center;gap:10px}
+    .logo{
+      height:34px;width:auto;display:block;
+      border-radius:10px;
+      background: rgba(255,255,255,.02);
+      border:1px solid var(--border);
+      padding:6px 8px;
+    }
+    .brandTitle{display:flex;flex-direction:column;gap:1px}
+    .brandTitle b{font-size:14px;letter-spacing:.2px}
+    .brandTitle span{font-size:12px;color:var(--muted)}
+    .controls{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
     .pill{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:7px 10px;
-      border:1px solid var(--line);
-      border-radius:999px;
+      border:1px solid var(--border);
       background: rgba(255,255,255,.03);
-      color:var(--muted);
-      font-size:12px;
-      white-space:nowrap;
-    }
-    .actions{display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:flex-end}
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center; gap:8px;
-      padding:9px 12px;
-      border-radius:12px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.04);
       color:var(--text);
-      font-size:13px;
-      cursor:pointer;
-      user-select:none;
+      padding:8px 10px;border-radius:999px;
+      font-size:12px;cursor:pointer;
+      display:inline-flex;gap:8px;align-items:center;
     }
-    .btn:hover{background: rgba(255,255,255,.06)}
-    .btn.primary{
-      border-color: rgba(120,166,255,.35);
-      background: rgba(120,166,255,.12);
-    }
-    .btn.good{
-      border-color: rgba(76,224,154,.35);
-      background: rgba(76,224,154,.10);
-    }
-
+    .pill.active{border-color: rgba(76,125,255,.55); background: rgba(76,125,255,.14)}
     .grid{
       display:grid;
-      grid-template-columns: 1.2fr .8fr;
+      grid-template-columns: 1.25fr .75fr;
       gap:14px;
       margin-top:16px;
     }
     @media (max-width: 920px){
-      .grid{grid-template-columns:1fr;}
-      .actions{justify-content:flex-start}
+      .grid{grid-template-columns:1fr}
+      .brand{min-width:auto}
+      .topbar{padding:10px 10px}
     }
-
     .card{
-      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
-      border:1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+      border:1px solid var(--border);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
-      overflow:hidden;
+      padding:18px;
     }
-    .card .hd{
-      padding:14px 14px 10px;
-      border-bottom:1px solid var(--line);
-      background: rgba(10,15,27,.35);
-      display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;
+    .hero h1{margin:0 0 8px;font-size:34px;letter-spacing:.2px}
+    .hero p{margin:0;color:var(--muted);font-size:14px;max-width:80ch}
+    .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+    .chip{
+      font-size:12px;color:var(--text);
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.02);
+      padding:7px 10px;border-radius:999px;
     }
-    .card .bd{padding:14px}
-    .h1{
-      font-size:22px; margin:0;
-      letter-spacing:.2px;
-    }
-    .sub{
-      margin:0; color:var(--muted); font-size:13px;
-    }
-    .tagRow{display:flex; gap:8px; flex-wrap:wrap; margin-top:10px}
-    .tag{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:6px 10px; border-radius:999px;
-      border:1px solid var(--line);
+    .ctaRow{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;
+      border-radius:12px;padding:10px 12px;
+      text-decoration:none;font-size:13px;
+      border:1px solid var(--border);
       background: rgba(255,255,255,.03);
-      color:var(--muted);
-      font-size:12px;
-      white-space:nowrap;
     }
+    .btn.primary{
+      border-color: rgba(76,125,255,.55);
+      background: rgba(76,125,255,.16);
+    }
+    .btn.good{
+      border-color: rgba(45,212,191,.55);
+      background: rgba(45,212,191,.12);
+    }
+    .sectionTitle{
+      display:flex;align-items:center;justify-content:space-between;
+      gap:10px;margin:0 0 10px
+    }
+    .sectionTitle h2{margin:0;font-size:16px}
+    .hint{font-size:12px;color:var(--muted)}
     .split{
-      display:grid; gap:12px;
-      grid-template-columns:1fr 1fr;
+      display:grid;grid-template-columns:1fr 1fr;gap:12px;
     }
-    @media (max-width: 820px){
-      .split{grid-template-columns:1fr;}
+    @media (max-width: 720px){.split{grid-template-columns:1fr}}
+    .kvs{
+      display:grid;grid-template-columns:1fr 1fr;gap:10px;
     }
-    .kpi{
-      padding:12px; border-radius: var(--radius2);
-      border:1px solid var(--line);
-      background: rgba(0,0,0,.18);
-    }
-    .kpi .v{font-size:18px; font-weight:700; margin:2px 0 0;}
-    .kpi .l{color:var(--muted); font-size:12px}
-    .secTitle{
-      margin:0 0 10px;
-      font-size:16px;
-      letter-spacing:.2px;
-    }
-    .hr{height:1px; background:var(--line); margin:12px 0}
-    .muted{color:var(--muted)}
-    ul{margin:10px 0 0 18px; padding:0}
-    li{margin:6px 0}
-
-    .riskWrap{display:grid; gap:12px; grid-template-columns: 1fr 1fr;}
-    @media (max-width: 820px){ .riskWrap{grid-template-columns:1fr;} }
-    .riskBox{
+    @media (max-width: 520px){.kvs{grid-template-columns:1fr}}
+    .kv{
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.02);
+      border-radius:14px;
       padding:12px;
-      border-radius: var(--radius2);
-      border:1px solid var(--line);
-      background: rgba(0,0,0,.18);
+    }
+    .kv b{display:block;font-size:12px;color:var(--muted);font-weight:600}
+    .kv span{display:block;margin-top:6px;font-size:14px}
+    .sim{
+      display:flex;align-items:flex-start;justify-content:space-between;gap:12px;
+      border:1px solid var(--border);
+      background: linear-gradient(180deg, rgba(45,212,191,.06), rgba(255,255,255,.01));
+      border-radius: 18px;
+      padding:16px;
     }
     .score{
-      display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;
+      font-size:40px;font-weight:800;letter-spacing:.5px;margin:6px 0 0
     }
     .badge{
-      padding:6px 10px; border-radius:999px; font-size:12px; font-weight:700;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
+      font-size:12px;padding:6px 10px;border-radius:999px;border:1px solid var(--border);
+      background: rgba(255,255,255,.02);white-space:nowrap
     }
-    .badge.good{border-color: rgba(76,224,154,.40); background: rgba(76,224,154,.10); color: var(--good);}
-    .badge.warn{border-color: rgba(255,204,102,.45); background: rgba(255,204,102,.12); color: var(--warn);}
-    .badge.bad{border-color: rgba(255,107,107,.40); background: rgba(255,107,107,.12); color: var(--bad);}
-    .bigScore{
-      font-size:34px; font-weight:900; letter-spacing:.5px;
-    }
-    .kv{display:grid; grid-template-columns: 1fr; gap:8px;}
-    .kv .row{display:flex; gap:10px; flex-wrap:wrap; color:var(--muted); font-size:13px;}
-    .kv b{color:var(--text)}
-
-    .pdfFrame{
-      width:100%;
-      height: 820px;
-      border:1px solid var(--line);
-      border-radius: 14px;
-      overflow:hidden;
-      background: rgba(0,0,0,.18);
-    }
-    @media (max-width: 520px){ .pdfFrame{height: 680px;} }
-
-    .foot{
-      margin-top:18px;
-      padding:14px;
-      border-radius: var(--radius);
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
-      color: var(--muted);
+    .badge.low{border-color: rgba(45,212,191,.45); background: rgba(45,212,191,.10)}
+    .badge.mid{border-color: rgba(251,191,36,.45); background: rgba(251,191,36,.10)}
+    .badge.high{border-color: rgba(251,113,133,.45); background: rgba(251,113,133,.10)}
+    .list{margin:10px 0 0;padding-left:16px;color:var(--muted);font-size:13px}
+    .footer{
+      margin-top:16px;
+      color:var(--muted);
       font-size:12px;
+      display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;
+      border-top:1px solid var(--border);
+      padding-top:14px;
     }
-
-    /* Language helper */
-    .langhide{display:none !important;}
-
-    /* Small inline icon */
-    .lensIcon{
-      display:inline-flex; align-items:center; justify-content:center;
-      width:28px; height:28px;
-      border-radius:10px;
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
-    }
-    .lensIcon svg{width:18px; height:18px; opacity:.95}
+    .small{font-size:12px;color:var(--muted)}
+    .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace}
+    .hr{height:1px;background:var(--border);margin:12px 0}
+    .hidden{display:none !important}
   </style>
 </head>
 
 <body>
-  <!-- Top bar -->
   <div class="topbar">
-    <div class="brandline" title="ZENTRA">
-      <!-- ZENTRA wordmark (embedded) -->
-      <img class="zentraLogo" alt="Zentra logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..." />
-      <!-- IMPORTANT: If the logo appears broken, re-commit once; GitHub sometimes caches. -->
-      <span class="pill">ONE-FILE Investor Demo • TR/EN</span>
-      <span class="pill">Contact: <a href="mailto:42mehmetaltas@gmail.com">42mehmetaltas@gmail.com</a></span>
+    <div class="brand">
+      <div class="logos">
+        <!-- Dosyalar: assets/zentra-logo.png ve assets/risklens-logo.png -->
+        <img class="logo" src="assets/zentra-logo.png" alt="Zentra logo">
+        <img class="logo" src="assets/risklens-logo.png" alt="RiskLens logo">
+      </div>
+      <div class="brandTitle">
+        <b>Zentra</b>
+        <span>RiskLens • Fintech & Islamic Finance Risk Intelligence</span>
+      </div>
     </div>
 
-    <div class="actions">
-      <button class="btn" id="btnEN" aria-label="Switch to English">EN</button>
-      <button class="btn" id="btnTR" aria-label="Türkçe'ye geç">TR</button>
-
-      <a class="btn primary" target="_blank" rel="noopener"
-         href="https://drive.google.com/file/d/1r3UR9HOM-dFqhRztARx_G23vAh0TAXh3/view">
-        Open PDF
-      </a>
-
-      <a class="btn good" target="_blank" rel="noopener"
-         href="mailto:42mehmetaltas@gmail.com?subject=Zentra%20%2F%20RiskLens%20Investor%20Interest&body=Hello%2C%0A%0AI%20reviewed%20the%20Zentra%20RiskLens%20demo%20and%20would%20like%20to%20connect.%0A%0AName%3A%0AFund%2FCompany%3A%0A">
-        Email
-      </a>
+    <div class="controls">
+      <button class="pill active" id="langTR" type="button" onclick="setLang('tr')">🇹🇷 TR</button>
+      <button class="pill" id="langEN" type="button" onclick="setLang('en')">🇬🇧 EN</button>
+      <button class="pill active" id="modeBOTH" type="button" onclick="setMode('both')">Mode: Both</button>
+      <button class="pill" id="modeBANK" type="button" onclick="setMode('bank')">Mode: Bank</button>
+      <button class="pill" id="modeVC" type="button" onclick="setMode('vc')">Mode: VC</button>
     </div>
   </div>
 
   <div class="wrap">
+
     <!-- HERO -->
-    <div class="grid">
-      <div class="card">
-        <div class="hd">
-          <div>
-            <h1 class="h1" data-lang="en">ZENTRA — Intelligence Infrastructure Company</h1>
-            <h1 class="h1 langhide" data-lang="tr">ZENTRA — Zekâ Altyapısı Şirketi</h1>
+    <div class="card hero">
+      <h1 data-tr="Zentra + RiskLens"
+          data-en="Zentra + RiskLens">Zentra + RiskLens</h1>
 
-            <p class="sub" data-lang="en">
-              Flagship Product: <b>RiskLens</b> — AI-powered transaction risk intelligence engine.
-            </p>
-            <p class="sub langhide" data-lang="tr">
-              Amiral Ürün: <b>RiskLens</b> — Yapay zekâ destekli işlem bazlı risk zekâsı motoru.
-            </p>
+      <p data-tr="Zentra bir teknoloji şirketidir. RiskLens ise bankalar, katılım bankaları ve fintech'ler için fatura sahteciliği tespiti + risk skorlama altyapısıdır. RiskLens para vermez, kredi vermez; yalnızca karar destek altyapısı üretir."
+         data-en="Zentra is a technology company. RiskLens is an invoice fraud detection + risk scoring infrastructure for banks, Islamic banks, and fintechs. RiskLens does not lend money; it provides decision intelligence infrastructure.">
+        Zentra bir teknoloji şirketidir...
+      </p>
 
-            <div class="tagRow">
-              <span class="tag">Infrastructure-first</span>
-              <span class="tag">Licensing + API</span>
-              <span class="tag">Islamic Finance Ready</span>
-              <span class="tag">Fraud & Integrity</span>
-            </div>
-          </div>
-
-          <div class="lensIcon" title="RiskLens">
-            <!-- Lightweight lens icon (no heavy image) -->
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Z" stroke="rgba(120,166,255,.95)" stroke-width="1.8"/>
-              <path d="M16.2 16.2 21 21" stroke="rgba(76,224,154,.90)" stroke-width="1.8" stroke-linecap="round"/>
-              <path d="M7.8 10.6c.5-1.8 2.1-3.1 4-3.1" stroke="rgba(255,255,255,.45)" stroke-width="1.6" stroke-linecap="round"/>
-            </svg>
-          </div>
-        </div>
-
-        <div class="bd">
-          <div class="split">
-            <div class="kpi">
-              <div class="l" data-lang="en">Core idea</div>
-              <div class="l langhide" data-lang="tr">Çekirdek fikir</div>
-              <div class="v" data-lang="en">Evaluate transactions — not only companies.</div>
-              <div class="v langhide" data-lang="tr">Firmayı değil, işlemi değerlendir.</div>
-            </div>
-            <div class="kpi">
-              <div class="l" data-lang="en">Positioning</div>
-              <div class="l langhide" data-lang="tr">Konumlandırma</div>
-              <div class="v" data-lang="en">Banks are customers — not dependencies.</div>
-              <div class="v langhide" data-lang="tr">Banka müşteri segmentidir — bağımlılık değildir.</div>
-            </div>
-          </div>
-
-          <div class="hr"></div>
-
-          <p data-lang="en">
-            <b>RiskLens</b> detects invoice fraud, produces real-time risk scores, and supports financial institutions through
-            <b>licensing</b>, <b>API usage</b>, and <b>certification</b>.
-            <b>RiskLens does NOT lend money</b>, does not finance transactions, and does not charge interest — it is a
-            decision-support intelligence layer.
-          </p>
-          <p class="langhide" data-lang="tr">
-            <b>RiskLens</b>; fatura sahteciliğini tespit eder, gerçek zamanlı risk skoru üretir ve finans kurumlarını
-            <b>lisans</b>, <b>API kullanım</b> ve <b>sertifikasyon</b> modeliyle destekler.
-            <b>RiskLens kredi vermez</b>, finansman sağlamaz, faiz üretmez — sadece karar destek zekâ katmanı sunar.
-          </p>
-
-          <p class="muted" data-lang="en">
-            Infrastructure wins: integrate once, earn recurring revenue (license + usage + modules).
-          </p>
-          <p class="muted langhide" data-lang="tr">
-            Altyapı kazandırır: bir kez entegre ol, tekrarlı gelir üret (lisans + kullanım + modüller).
-          </p>
-        </div>
+      <div class="chips">
+        <span class="chip" data-tr="B2B Lisans / API" data-en="B2B Licensing / API">B2B Lisans / API</span>
+        <span class="chip" data-tr="Fatura Sahteciliği & AML Sinyalleri" data-en="Invoice Fraud & AML Signals">Fatura Sahteciliği & AML</span>
+        <span class="chip" data-tr="Katılım Uyumlu Risk Altyapısı" data-en="Shariah-aligned Risk Infrastructure">Katılım Uyumlu</span>
+        <span class="chip" data-tr="Çoklu Ürün / Çoklu Gelir" data-en="Multi-product / Multi-revenue">Çoklu Gelir</span>
       </div>
 
-      <!-- RIGHT COLUMN -->
-      <div class="card">
-        <div class="hd">
-          <div>
-            <h2 class="secTitle" style="margin:0" data-lang="en">New Structure (Zentra → RiskLens → Modules)</h2>
-            <h2 class="secTitle langhide" style="margin:0" data-lang="tr">Yeni Yapılanma (Zentra → RiskLens → Modüller)</h2>
-            <p class="sub" data-lang="en">Clear separation: company vs product vs expansion.</p>
-            <p class="sub langhide" data-lang="tr">Net ayrım: şirket vs ürün vs genişleme.</p>
-          </div>
-        </div>
+      <div class="ctaRow">
+        <a class="btn primary" href="mailto:42mehmetaltas@gmail.com?subject=Zentra%20%2F%20RiskLens%20-%20Investor%20Intro"
+           data-tr="E-posta: 42mehmetaltas@gmail.com" data-en="Email: 42mehmetaltas@gmail.com">
+          E-posta: 42mehmetaltas@gmail.com
+        </a>
 
-        <div class="bd">
-          <div class="riskBox">
-            <div class="kv">
-              <div class="row"><b>ZENTRA</b> <span class="muted" data-lang="en">= intelligence infrastructure company</span><span class="muted langhide" data-lang="tr">= zekâ altyapısı şirketi</span></div>
-              <div class="row"><b>RiskLens</b> <span class="muted" data-lang="en">= flagship product (transaction intelligence)</span><span class="muted langhide" data-lang="tr">= amiral ürün (işlem zekâsı)</span></div>
-              <div class="row"><b>Modules</b> <span class="muted" data-lang="en">= each new panel → new revenue line</span><span class="muted langhide" data-lang="tr">= her panel → yeni gelir kalemi</span></div>
-            </div>
-          </div>
+        <!-- PDF linkini buradan değiştir -->
+        <a class="btn good" href="https://drive.google.com/file/d/1mbKvLr0G_hglcCIttU68LiJ-sh-Ws4Mz/view"
+           target="_blank" rel="noopener">
+          PDF • Investor File
+        </a>
 
-          <div class="hr"></div>
-
-          <h3 class="secTitle" data-lang="en">Initial 3-Branch Plan</h3>
-          <h3 class="secTitle langhide" data-lang="tr">İlk 3 Dal Planı</h3>
-
-          <ul data-lang="en">
-            <li><b>Branch 1:</b> RiskLens Core — Invoice fraud + transaction risk scoring</li>
-            <li><b>Branch 2:</b> FinTech SME Layer — Distribution platform + integrations</li>
-            <li><b>Branch 3:</b> Risk Engine Expansion — Compliance/Cyber/Crypto/Portfolio panels</li>
-          </ul>
-
-          <ul class="langhide" data-lang="tr">
-            <li><b>Dal 1:</b> RiskLens Çekirdek — Fatura sahteciliği + işlem risk skoru</li>
-            <li><b>Dal 2:</b> FinTech SME Katmanı — Dağıtım platformu + entegrasyon</li>
-            <li><b>Dal 3:</b> Risk Motoru Genişleme — Uyum/Siber/Kripto/Portföy panelleri</li>
-          </ul>
-
-          <div class="hr"></div>
-
-          <p class="muted" data-lang="en">
-            Modular infrastructure: one core engine, multiple upsell modules, expanding revenue over time.
-          </p>
-          <p class="muted langhide" data-lang="tr">
-            Modüler altyapı: tek çekirdek motor, çoklu upsell modüller, zamanla büyüyen gelir.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <!-- RISK SCORE SIM -->
-    <div class="card" style="margin-top:14px;">
-      <div class="hd">
-        <div>
-          <h2 class="secTitle" style="margin:0" data-lang="en">Risk Score Simulation</h2>
-          <h2 class="secTitle langhide" style="margin:0" data-lang="tr">Risk Skoru Simülasyonu</h2>
-          <p class="sub" data-lang="en">Investor demo simulation — real scoring is generated in pilots.</p>
-          <p class="sub langhide" data-lang="tr">Yatırımcı demo simülasyonu — gerçek skorlar pilotlarda üretilir.</p>
-        </div>
-        <button class="btn" id="runExampleBtn">Run Another Example</button>
+        <!-- Senin yeni Drive dosyan -->
+        <a class="btn" href="https://drive.google.com/file/d/1r3UR9HOM-dFqhRztARx_G23vAh0TAXh3/view"
+           target="_blank" rel="noopener">
+          PDF • Deck / Appendix
+        </a>
       </div>
 
-      <div class="bd">
-        <div class="riskWrap">
-          <div class="riskBox">
-            <div class="kv">
-              <div class="row"><span class="muted">Invoice:</span> <b id="invId">INV-2026-RL-001</b></div>
-              <div class="row" data-lang="en"><span class="muted">Company:</span> <b id="coNameEn">Global Trade Solutions LLC</b></div>
-              <div class="row langhide" data-lang="tr"><span class="muted">Firma:</span> <b id="coNameTr">Global Trade Solutions LLC</b></div>
-              <div class="row" data-lang="en"><span class="muted">Amount:</span> <b id="amtEn">$148,500</b> • <span class="muted">Country:</span> <b id="ctEn">UAE</b></div>
-              <div class="row langhide" data-lang="tr"><span class="muted">Tutar:</span> <b id="amtTr">$148,500</b> • <span class="muted">Ülke:</span> <b id="ctTr">BAE</b></div>
-            </div>
-
-            <div class="hr"></div>
-
-            <div class="score">
-              <div>
-                <div class="bigScore"><span id="scoreVal">85</span> / 100</div>
-                <div class="muted" data-lang="en">Risk Score</div>
-                <div class="muted langhide" data-lang="tr">Risk Skoru</div>
-              </div>
-              <div>
-                <span class="badge good" id="riskBadge">LOW RISK</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="riskBox">
-            <h3 class="secTitle" data-lang="en">Signals</h3>
-            <h3 class="secTitle langhide" data-lang="tr">Sinyaller</h3>
-
-            <ul id="signalsList" data-lang="en">
-              <li>No fraud signals detected</li>
-              <li>Verified business identity</li>
-              <li>Invoice structure valid</li>
-              <li>Low anomaly score</li>
-            </ul>
-
-            <ul class="langhide" id="signalsListTr" data-lang="tr">
-              <li>Sahtecilik sinyali yok</li>
-              <li>Firma kimliği doğrulandı</li>
-              <li>Fatura yapısı geçerli</li>
-              <li>Düşük anomali skoru</li>
-            </ul>
-
-            <div class="hr"></div>
-
-            <p class="muted" data-lang="en">
-              Decision: Proceed to finance decision (bank/fund decides). RiskLens provides intelligence only.
-            </p>
-            <p class="muted langhide" data-lang="tr">
-              Karar: Finansman kararına geç (banka/fon karar verir). RiskLens sadece zekâ sağlar.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ISLAMIC FINANCE -->
-    <div class="card" style="margin-top:14px;">
-      <div class="hd">
-        <h2 class="secTitle" style="margin:0" data-lang="en">Islamic Finance / Participation Banking Compatibility</h2>
-        <h2 class="secTitle langhide" style="margin:0" data-lang="tr">Katılım Bankacılığı Uyumu</h2>
-      </div>
-      <div class="bd">
-        <p data-lang="en">
-          RiskLens is a pure infrastructure and decision-support layer. It does <b>not</b> lend, does <b>not</b> finance, and does <b>not</b> charge interest.
-          This enables Shariah-friendly risk intelligence for participation banks and Islamic finance institutions.
-        </p>
-        <p class="langhide" data-lang="tr">
-          RiskLens saf altyapı ve karar destek katmanıdır. Kredi vermez, finansman sağlamaz, faiz üretmez.
-          Bu sayede katılım bankaları ve İslami finans kurumları için uyumlu risk zekâsı sağlar.
-        </p>
-      </div>
-    </div>
-
-    <!-- EMBEDDED PDF -->
-    <div class="card" style="margin-top:14px;">
-      <div class="hd">
-        <div>
-          <h2 class="secTitle" style="margin:0" data-lang="en">Pitch PDF (Drive)</h2>
-          <h2 class="secTitle langhide" style="margin:0" data-lang="tr">Pitch PDF (Drive)</h2>
-          <p class="sub" data-lang="en">If the PDF does not render on some devices, use “Open PDF”.</p>
-          <p class="sub langhide" data-lang="tr">PDF bazı cihazlarda görünmezse “Open PDF” ile yeni sekmede aç.</p>
-        </div>
-        <a class="btn primary" target="_blank" rel="noopener"
-           href="https://drive.google.com/file/d/1r3UR9HOM-dFqhRztARx_G23vAh0TAXh3/view">Open PDF</a>
-      </div>
-      <div class="bd">
-        <iframe
-          class="pdfFrame"
-          src="https://drive.google.com/file/d/1r3UR9HOM-dFqhRztARx_G23vAh0TAXh3/preview"
-          allow="autoplay"
-          title="Zentra Investor PDF">
-        </iframe>
-      </div>
-    </div>
-
-    <!-- FOOTER -->
-    <div class="foot">
-      <div data-lang="en">
-        Compliance note: RiskLens is a decision-support intelligence system. It does not lend, finance, or charge interest.
-        Financing is executed by regulated institutions using their own compliant products.
-      </div>
-      <div class="langhide" data-lang="tr">
-        Uyum notu: RiskLens karar destek zekâ sistemidir. Kredi vermez, finansman sağlamaz, faiz üretmez.
-        Finansman lisanslı kurumlar tarafından kendi ürünleriyle uygulanır.
-      </div>
       <div class="hr"></div>
-      <div class="muted">© Zentra (demo) • Contact: <a href="mailto:42mehmetaltas@gmail.com">42mehmetaltas@gmail.com</a></div>
+
+      <div class="kvs">
+        <div class="kv">
+          <b data-tr="Net Tanım" data-en="Clear Definition">Net Tanım</b>
+          <span data-tr="RiskLens = risk analizi + sahtecilik tespiti + karar destek"
+                data-en="RiskLens = risk analytics + fraud detection + decision intelligence">
+            RiskLens = risk analizi...
+          </span>
+        </div>
+        <div class="kv">
+          <b data-tr="Ödeyen Kim?" data-en="Who Pays?">Ödeyen Kim?</b>
+          <span data-tr="Banka / Faktoring / Fon / Finans Kurumu (RiskLens ödeme yapmaz)"
+                data-en="Bank / Factoring / Fund / Financial Institution (RiskLens does not pay)">
+            Banka / Faktoring...
+          </span>
+        </div>
+      </div>
     </div>
+
+    <div class="grid">
+      <!-- LEFT -->
+      <div class="card">
+        <div class="sectionTitle">
+          <h2 data-tr="Ürünler ve Yapılanma" data-en="Products & Structure">Ürünler ve Yapılanma</h2>
+          <span class="hint" data-tr="Tek platform, çoklu modül" data-en="One platform, multiple modules">Tek platform</span>
+        </div>
+
+        <div class="split">
+          <div class="kv">
+            <b data-tr="1) RiskLens — Invoice Intelligence" data-en="1) RiskLens — Invoice Intelligence">1) RiskLens</b>
+            <span data-tr="Fatura doğrulama, sahtecilik sinyalleri, risk skoru, limit önerisi."
+                  data-en="Invoice validation, fraud signals, risk score, limit recommendation."></span>
+            <ul class="list">
+              <li data-tr="Naylon fatura / karşılıksız mal sinyalleri" data-en="Fake invoice / non-delivery signals"></li>
+              <li data-tr="Çapraz kontrol: satıcı-alıcı ilişkisi + anomali" data-en="Cross-check: buyer-seller graph + anomalies"></li>
+              <li data-tr="AML risk sinyali: şüpheli örüntüler" data-en="AML signals: suspicious patterns"></li>
+            </ul>
+          </div>
+
+          <div class="kv">
+            <b data-tr="2) Finas — Finansal Yönetim (Opsiyon)" data-en="2) Finas — Financial Management (Optional)">2) Finas</b>
+            <span data-tr="KOBİ finans yönetimi arayüzü; RiskLens motoruna veri kalitesini artıran yapı."
+                  data-en="SME finance management UI; improves data quality for RiskLens engine."></span>
+            <ul class="list">
+              <li data-tr="Nakit akışı / tahsilat / fatura takibi" data-en="Cashflow / collections / invoice tracking"></li>
+              <li data-tr="Bankaya hazır rapor çıktıları" data-en="Bank-ready reporting outputs"></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="hr"></div>
+
+        <div class="kv">
+          <b data-tr="Katılım Bankacılığı Farkı (Uyum)" data-en="Islamic Finance Differentiator (Compliance)">Katılım Bankacılığı Farkı</b>
+          <span
+            data-tr="RiskLens, faizli kredi gibi davranmaz. Altyapı olarak 'risk değerlendirme' sağlar. Katılım ürünleri için uygun akış: murabaha / wakala / ticaret temelli süreçlerde fatura ve mal/hizmet gerçekliği sinyallerini güçlendirir."
+            data-en="RiskLens does not behave like interest-based lending. It provides risk assessment infrastructure. For Islamic finance flows (murabaha / wakala / trade-based), it strengthens invoice authenticity and delivery/real-economy signals."></span>
+          <ul class="list">
+            <li data-tr="Para veren kurum ayrı, RiskLens karar altyapısı" data-en="Funding institution is separate; RiskLens is decision infrastructure"></li>
+            <li data-tr="Uyum: şeffaflık + sahtecilik azaltma" data-en="Compliance: transparency + fraud reduction"></li>
+          </ul>
+        </div>
+
+        <div class="hr"></div>
+
+        <div class="kv">
+          <b data-tr="Büyüyen Gelir Mantığı" data-en="Growing Revenue Logic">Büyüyen Gelir Mantığı</b>
+          <span
+            data-tr="RiskLens geliştikçe yeni kontrol panelleri (AML, sektör riskleri, tedarik zinciri, siber risk sinyalleri) eklenir → her yeni panel yeni lisans ve yeni gelir demektir."
+            data-en="As RiskLens evolves, new control panels (AML, sector risk, supply-chain, cyber-risk signals) are added → each new panel becomes a new license and new revenue stream."></span>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="card">
+        <div class="sectionTitle">
+          <h2 data-tr="Risk Score Simülasyonu" data-en="Risk Score Simulation">Risk Score Simülasyonu</h2>
+          <span class="hint mono">INV-2026-RL-001</span>
+        </div>
+
+        <div class="sim" id="simBox">
+          <div>
+            <div class="small" data-tr="Simülasyon sonucu" data-en="Simulation result">Simülasyon sonucu</div>
+            <div class="score" id="scoreText">85</div>
+            <div class="small" id="scoreExplain"
+                 data-tr="Düşük risk • Şüpheli sinyal yok"
+                 data-en="Low risk • No fraud signals detected">
+              Düşük risk...
+            </div>
+          </div>
+          <div class="badge low" id="badgeText"
+               data-tr="LOW RISK"
+               data-en="LOW RISK">LOW RISK</div>
+        </div>
+
+        <div class="hr"></div>
+
+        <div class="sectionTitle">
+          <h2 data-tr="Hedef Müşteri" data-en="Target Customer">Hedef Müşteri</h2>
+          <span class="hint" data-tr="B2B" data-en="B2B">B2B</span>
+        </div>
+        <ul class="list">
+          <li data-tr="Banka / Katılım Bankası: risk motoru + dashboard" data-en="Banks / Islamic banks: risk engine + dashboard"></li>
+          <li data-tr="Faktoring / Fon: fatura seçimi & limit optimizasyonu" data-en="Factoring / funds: invoice selection & limit optimization"></li>
+          <li data-tr="Fintech: API ile ürünleştirme" data-en="Fintech: productization via API"></li>
+        </ul>
+
+        <div class="hr"></div>
+
+        <div class="sectionTitle">
+          <h2 data-tr="Yatırımcı Notu" data-en="Investor Note">Yatırımcı Notu</h2>
+          <span class="hint" data-tr="VC modu" data-en="VC mode">VC</span>
+        </div>
+        <div class="kv" id="vcOnlyBox">
+          <b data-tr="Neden yatırım?" data-en="Why invest?">Neden yatırım?</b>
+          <span
+            data-tr="B2B altyapı + lisans modeli: ölçeklenebilir, tekrar eden gelir. Tek ürünle başlar, modül sayısı arttıkça gelir katlanır."
+            data-en="B2B infrastructure + licensing: scalable recurring revenue. Starts with one product; revenue multiplies as modules expand."></span>
+        </div>
+
+        <div class="kv" id="bankOnlyBox" style="margin-top:10px;">
+          <b data-tr="Banka Notu" data-en="Bank Note">Banka Notu</b>
+          <span
+            data-tr="RiskLens kredi vermez. Banka kararını güçlendirir: sahte fatura, şüpheli örüntü ve AML sinyallerini azaltır."
+            data-en="RiskLens does not lend. It strengthens bank decisions: reduces fake invoices, suspicious patterns, and AML exposure."></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:14px;">
+      <div class="sectionTitle">
+        <h2 data-tr="Operasyonel Dayanıklılık (Savaş / İnternet / Enerji)" data-en="Operational Resilience (War / Internet / Power)">Dayanıklılık</h2>
+        <span class="hint" data-tr="Sunumda güven artırır" data-en="Builds investor confidence">Güven</span>
+      </div>
+      <div class="split">
+        <div class="kv">
+          <b data-tr="Çökme / Saldırı riski" data-en="Failure / Attack risk">Çökme / Saldırı</b>
+          <span
+            data-tr="Çok bölgeli yedek (multi-region), otomatik rollback, WAF + DDoS koruması, düzenli pentest ve log denetimi."
+            data-en="Multi-region redundancy, auto rollback, WAF + DDoS protection, regular pentests and audit logging."></span>
+        </div>
+        <div class="kv">
+          <b data-tr="İnternet yoksa?" data-en="If internet is down?">İnternet yoksa?</b>
+          <span
+            data-tr="Kurum içi (on-prem) veya özel bulut kurulumu opsiyonu. Offline kuyruklama + sonradan senkron."
+            data-en="On-prem/private cloud deployment option. Offline queuing + later sync."></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div>
+        <div><b>Zentra</b> • RiskLens</div>
+        <div class="small">Contact: <a href="mailto:42mehmetaltas@gmail.com">42mehmetaltas@gmail.com</a></div>
+      </div>
+      <div class="small">
+        <span class="mono">Build:</span> v11 •
+        <span data-tr="TR/EN + VC/BANKA modu" data-en="TR/EN + VC/BANK mode">TR/EN + VC/BANKA modu</span>
+      </div>
+    </div>
+
   </div>
 
-  <script>
-    // ---- Language toggle ----
-    const btnEN = document.getElementById('btnEN');
-    const btnTR = document.getElementById('btnTR');
+<script>
+  let LANG = 'tr';
+  let MODE = 'both';
 
-    function setLang(lang){
-      document.querySelectorAll('[data-lang]').forEach(el=>{
-        const elLang = el.getAttribute('data-lang');
-        if(elLang === lang){
-          el.classList.remove('langhide');
-        } else {
-          el.classList.add('langhide');
-        }
-      });
-      localStorage.setItem('zentra_lang', lang);
-      btnEN.classList.toggle('primary', lang === 'en');
-      btnTR.classList.toggle('primary', lang === 'tr');
-    }
-
-    const saved = localStorage.getItem('zentra_lang');
-    setLang(saved === 'tr' ? 'tr' : 'en');
-
-    btnEN.addEventListener('click', ()=>setLang('en'));
-    btnTR.addEventListener('click', ()=>setLang('tr'));
-
-    // ---- Risk score simulation ----
-    const examples = [
-      {
-        inv:"INV-2026-RL-001",
-        company:"Global Trade Solutions LLC",
-        amount:"$148,500",
-        countryEN:"UAE",
-        countryTR:"BAE",
-        score:85,
-        badge:"LOW RISK",
-        badgeClass:"good",
-        sigEN:["No fraud signals detected","Verified business identity","Invoice structure valid","Low anomaly score"],
-        sigTR:["Sahtecilik sinyali yok","Firma kimliği doğrulandı","Fatura yapısı geçerli","Düşük anomali skoru"]
-      },
-      {
-        inv:"INV-2026-RL-014",
-        company:"Al Noor Supplies FZCO",
-        amount:"$92,300",
-        countryEN:"UAE",
-        countryTR:"BAE",
-        score:72,
-        badge:"MEDIUM RISK",
-        badgeClass:"warn",
-        sigEN:["Minor pattern anomaly","Counterparty verification partial","Invoice timing unusual","Manual review recommended"],
-        sigTR:["Hafif örüntü anomali","Karşı taraf doğrulaması kısmi","Fatura zamanlaması sıra dışı","Manuel inceleme önerilir"]
-      },
-      {
-        inv:"INV-2026-RL-033",
-        company:"Rapid Export Partners Ltd",
-        amount:"$210,900",
-        countryEN:"UK",
-        countryTR:"İngiltere",
-        score:41,
-        badge:"HIGH RISK",
-        badgeClass:"bad",
-        sigEN:["High anomaly score","Counterparty mismatch signal","Unusual invoice structure","Potential synthetic activity"],
-        sigTR:["Yüksek anomali skoru","Karşı taraf uyumsuzluk sinyali","Sıra dışı fatura yapısı","Sentetik aktivite şüphesi"]
-      }
-    ];
-
-    const invId = document.getElementById('invId');
-    const coNameEn = document.getElementById('coNameEn');
-    const coNameTr = document.getElementById('coNameTr');
-    const amtEn = document.getElementById('amtEn');
-    const amtTr = document.getElementById('amtTr');
-    const ctEn = document.getElementById('ctEn');
-    const ctTr = document.getElementById('ctTr');
-    const scoreVal = document.getElementById('scoreVal');
-    const riskBadge = document.getElementById('riskBadge');
-    const signalsList = document.getElementById('signalsList');
-    const signalsListTr = document.getElementById('signalsListTr');
-
-    let idx = 0;
-    function renderExample(i){
-      const ex = examples[i];
-      invId.textContent = ex.inv;
-      coNameEn.textContent = ex.company;
-      coNameTr.textContent = ex.company;
-      amtEn.textContent = ex.amount;
-      amtTr.textContent = ex.amount;
-      ctEn.textContent = ex.countryEN;
-      ctTr.textContent = ex.countryTR;
-      scoreVal.textContent = ex.score;
-
-      riskBadge.textContent = ex.badge;
-      riskBadge.classList.remove('good','warn','bad');
-      riskBadge.classList.add(ex.badgeClass);
-
-      signalsList.innerHTML = ex.sigEN.map(s=>`<li>${s}</li>`).join('');
-      signalsListTr.innerHTML = ex.sigTR.map(s=>`<li>${s}</li>`).join('');
-    }
-
-    document.getElementById('runExampleBtn').addEventListener('click', ()=>{
-      idx = (idx + 1) % examples.length;
-      renderExample(idx);
+  function applyText(){
+    document.querySelectorAll('[data-tr]').forEach(el=>{
+      const val = LANG === 'tr' ? el.getAttribute('data-tr') : el.getAttribute('data-en');
+      if (val !== null && val !== undefined) el.textContent = val;
     });
 
-    renderExample(idx);
-  </script>
+    // Mode boxes
+    const vc = document.getElementById('vcOnlyBox');
+    const bank = document.getElementById('bankOnlyBox');
+
+    if (MODE === 'vc'){
+      vc.classList.remove('hidden');
+      bank.classList.add('hidden');
+    } else if (MODE === 'bank'){
+      vc.classList.add('hidden');
+      bank.classList.remove('hidden');
+    } else {
+      vc.classList.remove('hidden');
+      bank.classList.remove('hidden');
+    }
+  }
+
+  function setLang(l){
+    LANG = l;
+    document.getElementById('langTR').classList.toggle('active', l==='tr');
+    document.getElementById('langEN').classList.toggle('active', l==='en');
+    document.documentElement.lang = l;
+    applyText();
+  }
+
+  function setMode(m){
+    MODE = m;
+    document.getElementById('modeBOTH').classList.toggle('active', m==='both');
+    document.getElementById('modeBANK').classList.toggle('active', m==='bank');
+    document.getElementById('modeVC').classList.toggle('active', m==='vc');
+    applyText();
+  }
+
+  // initial
+  applyText();
+</script>
+
 </body>
-</html>
+  </html>
